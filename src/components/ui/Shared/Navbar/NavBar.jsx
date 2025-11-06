@@ -7,18 +7,18 @@ import Button from "../Button/Button";
 import HomeResponsiveMenu from "../ResponsiveMenu/HomeMenu/HomeResponsiveMenu";
 const NavBar = () => {
   return (
-    <div className="bg-[#ffffff] dark:bg-[#273041] py-3 lg:py-4 shadow-md px-2 ">
+    <div className="bg-[#ffffff] dark:bg-[#273041] py-3 2xl:py-3 shadow-md px-2 ">
       <nav className="container mx-auto flex items-center justify-between">
         <div className="logoh">
           <Image
             src={lightLogo}
             alt="Light Logo"
-            className="dark:hidden lg:h-12 w-auto"
+            className="dark:hidden 2xl:h-12 w-auto h-12 md:h-12 lg:h-9"
           />
           <Image
             src={darklogo}
             alt="Dark Logo"
-            className="hidden dark:block h-5 lg:h-12 w-auto"
+            className="hidden dark:block h-12 md:h-12 lg:h-9 2xl:h-12 w-auto"
           />
         </div>
         <div className="menus hidden h-5 lg:block">
