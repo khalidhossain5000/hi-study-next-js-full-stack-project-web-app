@@ -15,13 +15,13 @@ body {
 
 :root {
   --background: #e5e5e5;
-  --primary: #e76f51;
-  --text-primary: #000000;
+  --primary: #192335;
+  --text-primary: #192335;
 }
 
 .dark {
-  --background: #e5e5e5;
-  --primary: #e76f51;
+  --background: #192335;
+  --primary: #273041;
   --text-primary: #000000;
 }
 

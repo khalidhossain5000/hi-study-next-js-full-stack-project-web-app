@@ -18,7 +18,7 @@ const gabriela = Gabriela({
 });
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} ${gabriela.variable} antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
