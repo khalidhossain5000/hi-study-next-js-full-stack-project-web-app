@@ -11,7 +11,6 @@ const NavItem = () => {
       { name: "Contact", path: "/contact" },
       { name: "Dashboard", path: "/dashboard" },
       { name: "All Instructors", path: "/instructors"  },
-    //   { name: "All Categories", path: "/categories" },
       { name: "Premium Courses", path: "/premium-courses" },
       { name: "My Courses", path: "/my-courses"  },
       { name: "My Wishlist", path: "/wishlist" },
@@ -22,7 +21,7 @@ const NavItem = () => {
             <ul className="flex items-center gap-6 text-[17px] font-medium ">
          
             {
-                routes.map((route,i)=> <li key={i}><Link className={pathName===route.path ? "text-blue-500 font-bold" : "text-gray-700 dark:text-white"} href={route.path}>{route.name}</Link></li>)
+                routes.map((route,i)=> <li key={i}><Link className={pathName===route.path ? "text-blue-500 font-bold text-2xl" : "text-gray-700 dark:text-white"} href={route.path}>{route.name}</Link></li>)
             }
             
         </ul>
