@@ -8,7 +8,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AnimatedHamburgerButton from "../../AnimatedBurgerIcon/BurgerIcon";
@@ -67,8 +66,7 @@ const HomeResponsiveMenu = () => {
                 {/* theme toggle and login button */}
 
                 <div className="flex items-center justify-between gap-4 mb-4">
-                 
-                  <ModeToggle/>
+                  <ModeToggle />
                   <Button>Login</Button>
                 </div>
               </div>
