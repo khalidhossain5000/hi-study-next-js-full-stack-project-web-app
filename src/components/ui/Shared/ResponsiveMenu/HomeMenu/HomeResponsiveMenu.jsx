@@ -16,10 +16,9 @@ import { Button } from "@/components/ui/button";
 
 const HomeResponsiveMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const routes = [
     { name: "Home", path: "/" },
-    { name: "All Courses", path: "/courses" },
+    { name: "All Courses", path: "/allcoursers" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
     { name: "Dashboard", path: "/dashboard" },
