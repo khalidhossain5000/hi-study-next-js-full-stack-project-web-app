@@ -67,7 +67,7 @@ const HomeResponsiveMenu = () => {
                 {/* theme toggle and login button */}
 
                 <div className="flex items-center justify-between gap-4 mb-4">
-                  {/* theme toggle will be added here soon */}
+                 
                   <ModeToggle/>
                   <Button>Login</Button>
                 </div>
