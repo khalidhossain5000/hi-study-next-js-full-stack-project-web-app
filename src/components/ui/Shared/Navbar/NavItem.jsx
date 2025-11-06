@@ -17,11 +17,11 @@ const NavItem = () => {
     ];
     const pathName=usePathname()
     return (
-        <div>
-            <ul className="flex items-center gap-6 text-[17px] font-medium ">
+        <div className=''>
+            <ul className="flex items-center gap-5 text-[17px] font-medium ">
          
             {
-                routes.map((route,i)=> <li key={i}><Link className={pathName===route.path ? "text-blue-500 font-bold text-2xl" : "text-gray-700 dark:text-white"} href={route.path}>{route.name}</Link></li>)
+                routes.map((route,i)=> <li key={i}><Link className={pathName===route.path ? "text-[#394ef4] font-semibold text-2xl" : "text-gray-700 hover:text-blue-500 transtion duration-200  dark:text-white"} href={route.path}>{route.name}</Link></li>)
             }
             
         </ul>
