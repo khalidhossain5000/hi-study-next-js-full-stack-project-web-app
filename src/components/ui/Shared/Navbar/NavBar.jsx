@@ -5,6 +5,7 @@ import Image from "next/image";
 import NavItem from "./NavItem";
 import Button from "../Button/Button";
 import HomeResponsiveMenu from "../ResponsiveMenu/HomeMenu/HomeResponsiveMenu";
+import { ModeToggle } from "../ThemeToggle/ThemeToggle";
 const NavBar = () => {
   return (
     <div className="bg-[#ffffff] dark:bg-[#273041] py-3 2xl:py-3 shadow-md px-2 ">
@@ -25,11 +26,11 @@ const NavBar = () => {
           <NavItem />
         </div>
         <div className="auth-btns">
-          <div className="hidden lg:block">
-
-          <Button >Login</Button>
+          <div className="hidden lg:flex items-center gap-6">
+            <ModeToggle/>
+            <Button>Login</Button>
           </div>
-          <HomeResponsiveMenu/>
+          <HomeResponsiveMenu />
         </div>
       </nav>
     </div>

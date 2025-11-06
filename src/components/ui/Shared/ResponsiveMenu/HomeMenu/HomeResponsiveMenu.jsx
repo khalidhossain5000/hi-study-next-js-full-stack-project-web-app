@@ -12,9 +12,11 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AnimatedHamburgerButton from "../../AnimatedBurgerIcon/BurgerIcon";
+import { ModeToggle } from "../../ThemeToggle/ThemeToggle";
+import { Button } from "@/components/ui/button";
 
 const HomeResponsiveMenu = () => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const routes = [
     { name: "Home", path: "/" },
@@ -27,15 +29,18 @@ const HomeResponsiveMenu = () => {
     { name: "My Courses", path: "/my-courses" },
     { name: "My Wishlist", path: "/wishlist" },
   ];
-  const pathName=usePathname()
+  const pathName = usePathname();
   return (
     <div className="lg:hidden">
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger>
-           
-          <AnimatedHamburgerButton className='text-black' isOpen={isOpen} setIsOpen={setIsOpen}/>
+          <AnimatedHamburgerButton
+            className="text-black"
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          />
         </SheetTrigger>
-        <SheetContent className="" side="left">
+        <SheetContent className="dark:border-none" side="left">
           <SheetHeader>
             <SheetTitle></SheetTitle>
             <div className="h-[90vh] flex flex-col justify-between">
@@ -61,8 +66,10 @@ const HomeResponsiveMenu = () => {
 
                 {/* theme toggle and login button */}
 
-                <div className="flex items-center gap-6">
+                <div className="flex items-center justify-between gap-4 mb-4">
                   {/* theme toggle will be added here soon */}
+                  <ModeToggle/>
+                  <Button>Login</Button>
                 </div>
               </div>
             </div>
