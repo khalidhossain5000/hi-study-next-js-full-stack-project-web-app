@@ -1,5 +1,6 @@
 import { Gabriela, Poppins } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "../../Providers/ThemeProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -18,10 +19,8 @@ const gabriela = Gabriela({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.variable} ${gabriela.variable} antialiased`}
-      >
-        {children}
+      <body className={`${poppins.variable} ${gabriela.variable} antialiased`}>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
