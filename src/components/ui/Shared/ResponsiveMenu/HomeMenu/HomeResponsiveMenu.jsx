@@ -25,7 +25,7 @@ const HomeResponsiveMenu = () => {
     { name: "All Instructors", path: "/instructors" },
     { name: "Premium Courses", path: "/premium-courses" },
     { name: "My Courses", path: "/my-courses" },
-    { name: "My Wishlist", path: "/wishlist" },
+    { name: "My Wishlist", path: "/wishlists" },
   ];
   const pathName = usePathname();
   return (
