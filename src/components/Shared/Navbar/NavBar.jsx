@@ -1,11 +1,12 @@
 import React from "react";
-import lightLogo from "../../../../assets/logo/logo-black.png";
-import darklogo from "../../../../assets/logo/logo-light.png";
+import lightLogo from "../../../assets/logo/logo-black.png";
+import darklogo from "../../../assets/logo/logo-light.png";
 import Image from "next/image";
 import NavItem from "./NavItem";
 import Button from "../Button/Button";
-import HomeResponsiveMenu from "../ResponsiveMenu/HomeMenu/HomeResponsiveMenu";
+
 import { ModeToggle } from "../ThemeToggle/ThemeToggle";
+import HomeResponsiveMenu from "../ResponsiveMenu/HomeMenu/HomeResponsiveMenu";
 const NavBar = () => {
   return (
     <div className="bg-[#ffffff] dark:bg-[#273041] py-3 2xl:py-3 shadow-md px-2 ">
