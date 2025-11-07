@@ -4,8 +4,8 @@ import FlagOrbit from "./FlagOrbit";
 
 const Banner = () => {
   return (
-    <div className="flex flex-col-reverse lg:flex-row items-center ">
-      <div className="flex-1 content text-center lg:text-left space-y-6 px-2">
+    <div className="flex flex-col-reverse lg:flex-row items-center gap-20 lg:gap-10">
+      <div className="flex-1 content text-center lg:text-left space-y-6 px-2 ">
         <h5 className="text-sm lg:text-[18px] bg-linear-to-t from-[#394ef4] to-[#b966e7] bg-clip-text text-transparent">
           Multi-Language Academy
         </h5>

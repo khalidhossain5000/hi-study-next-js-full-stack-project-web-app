@@ -13,13 +13,19 @@ import pakistan from "../../../assets/banner/flag-and-icon-r/flag-pakistan.png";
 import srilanka from "../../../assets/banner/flag-and-icon-r/flag-srilonka.png";
 import uk from "../../../assets/banner/flag-and-icon-r/flag-uk.png";
 import usa from "../../../assets/banner/flag-and-icon-r/flag-usa.png";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const FlagOrbit = () => {
   return (
     <TooltipProvider>
-      <div className="relative flex items-center justify-center w-[500px] h-[500px] mx-auto">
+      <div className="relative flex items-center justify-center lg:w-[500px] lg:h-[500px] w-[300px] h-[300px] mx-auto">
         {/* World map */}
+
         <div className="relative">
           <Image
             src={worldmap}
@@ -32,13 +38,13 @@ const FlagOrbit = () => {
 
         {/* All flags container */}
         <div
-          className="all-flags flex justify-center rounded-full w-[500px] h-[500px] absolute top-0 border-2 border-dashed border-gray-600 z-10 animate-spin hover:paused"
+          className="all-flags flex justify-center rounded-full w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] absolute top-0 lg:border-2 border-dashed border-gray-300 z-10 animate-spin hover:paused"
           style={{ animationDuration: "30s" }}
         >
           {/* Australia */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center -top-9">
+              <div className="absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center -top-[26px] left-[147px] lg:left-60 lg:-top-9">
                 <Image src={australia} alt="Australia" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -47,10 +53,11 @@ const FlagOrbit = () => {
             </TooltipContent>
           </Tooltip>
 
+
           {/* Canada */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-0.5 left-[97px]">
+              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[7px] lg:top-0.5 left-[97px] right-[25px] lg:right-[85px]">
                 <Image src={canada} alt="Canada" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -62,7 +69,7 @@ const FlagOrbit = () => {
           {/* China */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[5px] right-[85px]">
+              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-20 lg:top-[5px] -right-4 lg:right-[85px]">
                 <Image src={china} alt="China" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -74,7 +81,7 @@ const FlagOrbit = () => {
           {/* France */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[114px] -right-[5px]">
+              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-[84px] lg:top-[114px] -right-[19px] lg:-right-[5px]">
                 <Image src={france} alt="France" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -86,7 +93,7 @@ const FlagOrbit = () => {
           {/* Germany */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-[186px] -right-[30px]">
+              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-4 lg:bottom-[186px] right-4 lg:-right-[30px]">
                 <Image src={germany} alt="Germany" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -98,7 +105,7 @@ const FlagOrbit = () => {
           {/* Japan */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-14 right-[30px]">
+              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] -bottom-5 lg:bottom-14 right-[110px] lg:right-[30px]">
                 <Image src={japan} alt="Japan" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -110,7 +117,7 @@ const FlagOrbit = () => {
           {/* Korea */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] -bottom-[17px] right-[148px]">
+              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] lg:-bottom-3.5 -bottom-1 left-[55px] lg:left-[295px]">
                 <Image src={korea} alt="Korea" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -122,7 +129,7 @@ const FlagOrbit = () => {
           {/* Pakistan */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] -bottom-3.5 left-[135px]">
+              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-14 lg:-bottom-3.5 -left-[9px] lg:left-[135px]">
                 <Image src={pakistan} alt="Pakistan" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -134,7 +141,7 @@ const FlagOrbit = () => {
           {/* Sri Lanka */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-[66px] left-[23px]">
+              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-[134px] lg:bottom-[66px] lg:left-[23px]">
                 <Image src={srilanka} alt="Sri Lanka" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -146,7 +153,7 @@ const FlagOrbit = () => {
           {/* UK */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-[191px] -left-[25px]">
+              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[35px] lg:top-60 left-.5 lg:-left-6">
                 <Image src={uk} alt="UK" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -158,7 +165,7 @@ const FlagOrbit = () => {
           {/* USA */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[107px] left-0">
+              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] -top-[19px] lg:top-[107px] left-[69px] lg:left-0">
                 <Image src={usa} alt="USA" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -173,3 +180,100 @@ const FlagOrbit = () => {
 };
 
 export default FlagOrbit;
+
+// OLD CODE HERE
+
+// "use client";
+// import Image from "next/image";
+// import React from "react";
+// import worldmap from "../../../assets/banner/world.png";
+// import australia from "../../../assets/banner/flag-and-icon-r/flag-australia.png";
+// import canada from "../../../assets/banner/flag-and-icon-r/flag-canada.png";
+// import china from "../../../assets/banner/flag-and-icon-r/flag-china.png";
+// import france from "../../../assets/banner/flag-and-icon-r/flag-french.png";
+// import germany from "../../../assets/banner/flag-and-icon-r/flag-germany.png";
+// import japan from "../../../assets/banner/flag-and-icon-r/flag-japan.png";
+// import korea from "../../../assets/banner/flag-and-icon-r/flag-korea.png";
+// import pakistan from "../../../assets/banner/flag-and-icon-r/flag-pakistan.png";
+// import srilanka from "../../../assets/banner/flag-and-icon-r/flag-srilonka.png";
+// import uk from "../../../assets/banner/flag-and-icon-r/flag-uk.png";
+// import usa from "../../../assets/banner/flag-and-icon-r/flag-usa.png";
+// import { motion } from "framer-motion";
+// const FlagOrbit = () => {
+//   return (
+//     <div className=" relative flex items-center justify-center w-[500px] h-[500px]  mx-auto ">
+//       {/* flags world map container here */}
+//       <div className="relative">
+//         <Image
+//           src={worldmap}
+//           alt="world map"
+//           width={500}
+//           height={500}
+//           className="w-full relative z-10"
+//         />
+//       </div>
+//       {/* all flags container */}
+//       <div
+
+//         className="all-flags flex justify-center rounded-full w-[500px] h-[500px] absolute top-0 border-2 border-dashed border-gray-600 z-10 animate-spin hover:paused"
+//         style={{ animationDuration: "30s" }}
+//       >
+//         {/* aus */}
+
+//         <div  className="absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center -top-9">
+//           <Image
+//             src={australia}
+//             alt="australia"
+//             width={60}
+//             height={60}
+//             className=""
+//           />
+
+//         </div>
+
+//         {/* canada */}
+//         <div className="flags-reverse flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-0.5 left-[97px]">
+//           <Image src={canada} alt="australia" width={60} height={60} />
+//         </div>
+//         {/* china */}
+//         <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[5px] right-[85px]">
+//           <Image src={china} alt="australia" width={60} height={60} />
+//         </div>
+//         {/* franse */}
+//         <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[114px] -right-[5px]">
+//           <Image src={france} alt="australia" width={60} height={60} />
+//         </div>
+//         {/* germany */}
+//         <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-[186px] -right-[30px]">
+//           <Image src={germany} alt="australia" width={60} height={60} />
+//         </div>
+//         {/* japans */}
+//         <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-14 right-[30px] ">
+//           <Image src={japan} alt="australia" width={60} height={60} />
+//         </div>
+//         {/* austranlia */}
+//         <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] -bottom-[17px] right-[148px]">
+//           <Image src={korea} alt="australia" width={60} height={60} />
+//         </div>
+//         {/* pakistan */}
+//         <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] -bottom-3.5 left-[135px]">
+//           <Image src={pakistan} alt="australia" width={60} height={60} />
+//         </div>
+//         {/* lanka */}
+//         <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-[66px] left-[23px]">
+//           <Image src={srilanka} alt="australia" width={60} height={60} />
+//         </div>
+//         {/* uk */}
+//         <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-[191px] -left-[25px]">
+//           <Image src={uk} alt="australia" width={60} height={60} />
+//         </div>
+//         {/* usa */}
+//         <div className="flags-reverse absolute z-10 w-[60px] h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[107px] left-0">
+//           <Image src={usa} alt="australia" width={60} height={60} />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default FlagOrbit;
