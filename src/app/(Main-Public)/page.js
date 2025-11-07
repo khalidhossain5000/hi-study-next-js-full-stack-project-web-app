@@ -3,8 +3,11 @@ import React from 'react';
 
 const HomePage = () => {
     return (
-        <div>
+        <div className='bg-gray-100 py-22'>
+            <div className='container mx-auto '>
+
             <Banner/>
+            </div>
         </div>
     );
 };
