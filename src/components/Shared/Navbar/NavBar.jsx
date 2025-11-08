@@ -11,6 +11,11 @@ import HomeResponsiveMenu from "../ResponsiveMenu/HomeMenu/HomeResponsiveMenu";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { AnimatedButton } from "@/components/ui/animated-button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 const NavBar = () => {
   const{data:session}=useSession()
   console.log(session);
@@ -40,13 +45,25 @@ const NavBar = () => {
             </div>
             <div className="hidden lg:flex items-center gap-6">
               <div>
-                <Image
+                
+              
+
+
+    <Tooltip>
+      <TooltipTrigger asChild>
+       <Image
                 src={session?.user?.image || 'https://i.ibb.co/zVB99J4d/DEFAULT.jpg'}
                 alt="user profile image with avatar here"
                 width={50}
                 height={50}
-                className="rounded-full border-2 border-indigo-600 p-1"
+                className="rounded-full border-2 border-indigo-600 p-1 cursor-pointer"
                 />
+      </TooltipTrigger>
+      <TooltipContent className={`bg-[#d176da] p-2 text-md`}>
+        <p>{session?.user?.name}</p>
+      </TooltipContent>
+    </Tooltip>
+
               </div>
               <div>
                 {
