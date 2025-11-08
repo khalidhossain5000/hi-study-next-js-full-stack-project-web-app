@@ -1,11 +1,30 @@
 "use client";
 import React from "react";
-import { FcGoogle } from "react-icons/fc";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { AnimatedButton } from "@/components/ui/animated-button";
+import SocialLogin from "@/components/Shared/SocialLogin/SocialLogin";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const Register = () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    const result=await signIn("credentials",{
+      redirect:true,
+      callbackUrl:"/",
+      name,
+      email,
+      password
+    })
+   console.log(result,'result from register')
+   toast.success("Registered successfully!");
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0e1015] text-white px-4">
       <motion.div
@@ -21,23 +40,12 @@ const Register = () => {
           transition={{ delay: 0.2 }}
           className="text-3xl font-bold text-center mb-6 text-white tracking-wide"
         >
-          Create Account ✨
+          Create Account
         </motion.h2>
 
         {/* Google Login */}
-        
-        
-        <motion.button
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.98 }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="w-full py-3 mb-4 flex items-center justify-center gap-3 bg-[#222b3b] border border-[#394ef4]/30 hover:border-[#394ef4] text-white font-medium rounded-lg shadow-lg hover:shadow-indigo-500/10 transition-all duration-300 cursor-pointer"
-        >
-          <FcGoogle size={22} />
-          <span>Continue with Google</span>
-        </motion.button>
+
+        <SocialLogin />
 
         {/* Divider */}
         <motion.div
@@ -59,6 +67,7 @@ const Register = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.6 }}
+          onSubmit={handleRegister}
         >
           {/* Name Field */}
           <div>
@@ -71,6 +80,7 @@ const Register = () => {
               placeholder="Enter your name"
               className="w-full px-4 py-3 border border-gray-700 rounded-lg bg-[#141824] text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#394ef4] placeholder-gray-500 transition-all"
               required
+              name="name"
             />
           </div>
 
@@ -85,6 +95,7 @@ const Register = () => {
               placeholder="you@example.com"
               className="w-full px-4 py-3 border border-gray-700 rounded-lg bg-[#141824] text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#394ef4] placeholder-gray-500 transition-all"
               required
+              name="email"
             />
           </div>
 
@@ -99,29 +110,30 @@ const Register = () => {
               placeholder="••••••••"
               className="w-full px-4 py-3 border border-gray-700 rounded-lg bg-[#141824] text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#394ef4] placeholder-gray-500 transition-all"
               required
+              name="password"
             />
           </div>
 
           {/* Register Button */}
-         
+
           <AnimatedButton
-        className="bg-linear-to-r from-[#b966e7] to-[#394ef4] hover:scale-105 lg:p-6 text-white w-full"
-        variant="default"
-        size="default"
-        glow={false}
-        textEffect="normal"
-        uppercase={true}
-        rounded="custom"
-        asChild={false}
-        hideAnimations={false}
-        shimmerColor="#39FF14"
-        shimmerSize="0.15em"
-        shimmerDuration="3s"
-        borderRadius="10px"
-        background="rgba(0, 0, 0, 1)"
-      >
-        Register
-      </AnimatedButton>
+            className="bg-linear-to-r from-[#b966e7] to-[#394ef4] hover:scale-105 lg:p-6 text-white w-full"
+            variant="default"
+            size="default"
+            glow={false}
+            textEffect="normal"
+            uppercase={true}
+            rounded="custom"
+            asChild={false}
+            hideAnimations={false}
+            shimmerColor="#39FF14"
+            shimmerSize="0.15em"
+            shimmerDuration="3s"
+            borderRadius="10px"
+            background="rgba(0, 0, 0, 1)"
+          >
+            Register
+          </AnimatedButton>
         </motion.form>
 
         {/* Bottom Text */}

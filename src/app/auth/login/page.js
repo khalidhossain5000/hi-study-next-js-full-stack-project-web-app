@@ -1,12 +1,30 @@
 "use client";
 import React from "react";
-import { FcGoogle } from "react-icons/fc";
 import { Shield } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { AnimatedButton } from "@/components/ui/animated-button";
+import SocialLogin from "@/components/Shared/SocialLogin/SocialLogin";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const Login = () => {
+ 
+    const handleLogin = async (e) => {
+      e.preventDefault();
+  
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+  
+      const result=await signIn("credentials",{
+        redirect:true,
+        callbackUrl:"/",
+        email,
+        password
+      })
+     console.log(result,'result from register')
+     toast.success("Registered successfully!");
+    };
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0e1015] text-white px-4">
       <motion.div
@@ -26,17 +44,7 @@ const Login = () => {
         </motion.h2>
 
         {/* Google Login */}
-        <motion.button
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.98 }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="w-full py-3 mb-4 flex items-center justify-center gap-3 bg-[#222b3b] border border-[#394ef4]/30 hover:border-[#394ef4] text-white font-medium rounded-lg shadow-lg hover:shadow-indigo-500/10 transition-all duration-300"
-        >
-          <FcGoogle size={22} />
-          <span>Continue with Google</span>
-        </motion.button>
+      <SocialLogin/>
 
         {/* Admin Login */}
         <motion.button
@@ -71,6 +79,7 @@ const Login = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
+          onSubmit={handleLogin}
         >
           <div>
             <label className="block mb-2 text-sm font-medium text-gray-300">
@@ -82,6 +91,7 @@ const Login = () => {
               placeholder="you@example.com"
               className="w-full px-4 py-3 border border-gray-700 rounded-lg bg-[#141824] text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#394ef4] placeholder-gray-500 transition-all"
               required
+              name="email"
             />
           </div>
 
@@ -95,6 +105,7 @@ const Login = () => {
               placeholder="••••••••"
               className="w-full px-4 py-3 border border-gray-700 rounded-lg bg-[#141824] text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#394ef4] placeholder-gray-500 transition-all"
               required
+              name='password'
             />
           </div>
 

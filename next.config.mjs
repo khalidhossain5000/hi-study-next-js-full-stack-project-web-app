@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  reactStrictMode: true,
+  images: {
+    domains: ["i.ibb.co"], // whitelist your image host here
+  },
 };
 
 export default nextConfig;

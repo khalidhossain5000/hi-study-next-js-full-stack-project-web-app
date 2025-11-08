@@ -1,6 +1,7 @@
 import { Gabriela, Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../../Providers/ThemeProvider";
+import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           {children}
+          <Toaster position="top-center" reverseOrder={false} />
         </ThemeProvider>
       </body>
     </html>
