@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import lightLogo from "../../../assets/logo/logo-black.png";
 import darklogo from "../../../assets/logo/logo-light.png";
@@ -7,6 +8,7 @@ import Button from "../Button/Button";
 
 import { ModeToggle } from "../ThemeToggle/ThemeToggle";
 import HomeResponsiveMenu from "../ResponsiveMenu/HomeMenu/HomeResponsiveMenu";
+import Link from "next/link";
 const NavBar = () => {
   return (
     <div className="bg-[#ffffff] dark:bg-[#273041] py-3 2xl:py-3 shadow-md px-2 ">
@@ -29,7 +31,8 @@ const NavBar = () => {
         <div className="auth-btns">
           <div className="hidden lg:flex items-center gap-6">
             <ModeToggle/>
-            <Button>Login</Button>
+            <Link href={`/auth/login`}><Button>Login</Button></Link>
+            
           </div>
           <HomeResponsiveMenu />
         </div>
