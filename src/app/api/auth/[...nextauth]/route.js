@@ -6,7 +6,7 @@ import bcrypt from "bcrypt";
 
 export const authOptions = {
   providers: [
-    // Google OAuth
+    // Google OAuth here
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -41,7 +41,10 @@ export const authOptions = {
         }
 
         // Compare input password with hashed password
-        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+        const isPasswordValid = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
         if (!isPasswordValid) return null;
 
         return user;
@@ -61,7 +64,9 @@ export const authOptions = {
     async signIn({ user, account }) {
       if (account?.provider === "google") {
         const usersCollection = await getCollection("users");
-        const existingUser = await usersCollection.findOne({ email: user.email });
+        const existingUser = await usersCollection.findOne({
+          email: user.email,
+        });
 
         if (!existingUser) {
           await usersCollection.insertOne({

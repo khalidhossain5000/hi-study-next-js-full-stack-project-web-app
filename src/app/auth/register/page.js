@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
-    // getting name
+ 
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
