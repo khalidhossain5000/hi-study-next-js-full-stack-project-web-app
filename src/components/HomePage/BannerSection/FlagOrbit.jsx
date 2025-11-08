@@ -37,7 +37,7 @@ const FlagOrbit = () => {
 
       {/* All flags container */}
       <div
-        className="all-flags flex justify-center rounded-full w-[290px] md:w-[500px] h-[290px] md:h-[500px] sm:w-[300px] sm:h-[300px] absolute top-0 border-2 border-dashed border-gray-300 z-10 animate-spin hover:paused"
+        className="all-flags flex justify-center rounded-full w-[290px] md:w-[500px] h-[290px] md:h-[500px] sm:w-[300px] sm:h-[300px] absolute top-0 border-2 dark:border border-dashed border-gray-400 dark:border-gray-50 z-10 animate-spin hover:paused"
         style={{ animationDuration: "30s" }}
       >
         {/* Australia */}

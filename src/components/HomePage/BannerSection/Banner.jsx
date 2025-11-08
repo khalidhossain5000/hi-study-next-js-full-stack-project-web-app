@@ -14,7 +14,7 @@ import curveiv from "../../../assets/banner/bg/curve-line-4.png";
 import dot from "../../../assets/banner/bg/dot-bg.png";
 const Banner = () => {
   return (
-    <div className=" bg-[#F5F7FA]  overflow-x-hidden py-12 lg:py-22 2xl:pt-[155px] 2xl:pb-[165px] relative">
+    <div className=" bg-[#F5F7FA] dark:bg-[#192335]  overflow-x-hidden py-12 lg:py-22 2xl:pt-[155px] 2xl:pb-[165px] relative">
       <div className="shapes absolute top-0 left-0 w-full h-full">
         <div className="circle-shapes-1 absolute ">
           <img src={shadowi.src} alt="shape" className="max-w-full" />
@@ -52,10 +52,10 @@ const Banner = () => {
             Multi-Language Academy
           </h5>
 
-          <h2 className="text-2xl md:text-3xl xl:text-[60px] text-[#192335] font-bold font-gabriela">
+          <h2 className="text-2xl md:text-3xl xl:text-[60px] text-[#192335] dark:text-white font-bold font-gabriela">
             Take Online Language And Technical Courses With Certificate
           </h2>
-          <p className="text-xl text-gray-900 max-w-[560px] mx-auto lg:mx-0 ">
+          <p className="text-xl text-gray-900 dark:text-gray-100 font-poppins max-w-[560px] mx-auto lg:mx-0 ">
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
             sint. Velit officia consequat.
           </p>
