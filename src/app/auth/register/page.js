@@ -23,7 +23,7 @@ const Register = () => {
       password
     })
    console.log(result,'result from register')
-   toast.success("Registered successfully!");
+   toast.success("Registered successfully! h");
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0e1015] text-white px-4">
