@@ -4,6 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Shield } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { AnimatedButton } from "@/components/ui/animated-button";
 
 const Login = () => {
   return (
@@ -97,14 +98,24 @@ const Login = () => {
             />
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            type="submit"
-            className="w-full py-3 mt-2 bg-gradient-to-r from-[#394ef4] to-[#b966e7] text-white font-semibold rounded-lg shadow-md hover:opacity-90 transition-all"
+          <AnimatedButton
+            className="bg-linear-to-r from-[#b966e7] to-[#394ef4] hover:scale-105 lg:p-6 text-white w-full"
+            variant="default"
+            size="default"
+            glow={false}
+            textEffect="glitch"
+            uppercase={true}
+            rounded="custom"
+            asChild={false}
+            hideAnimations={false}
+            shimmerColor="#39FF14"
+            shimmerSize="0.15em"
+            shimmerDuration="3s"
+            borderRadius="10px"
+            background="rgba(0, 0, 0, 1)"
           >
             Login
-          </motion.button>
+          </AnimatedButton>
         </motion.form>
 
         {/* Bottom Text */}
