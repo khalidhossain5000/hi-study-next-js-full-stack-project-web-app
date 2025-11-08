@@ -22,8 +22,8 @@ import {
 
 const FlagOrbit = () => {
   return (
-    <TooltipProvider>
-      <div className="relative flex items-center justify-center lg:w-[500px] lg:h-[500px] w-[300px] h-[300px] mx-auto">
+    
+      <div className="relative flex items-center justify-center md:w-[500px] md:h-[500px] w-[290px] h-[290px] sm:w-[300px] sm:h-[300px] mx-auto">
         {/* World map */}
 
         <div className="relative">
@@ -32,19 +32,19 @@ const FlagOrbit = () => {
             alt="world map"
             width={500}
             height={500}
-            className="w-full relative z-10"
+            className="w-10/12 mx-auto md:w-full relative z-10"
           />
         </div>
 
         {/* All flags container */}
         <div
-          className="all-flags flex justify-center rounded-full w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] absolute top-0 lg:border-2 border-dashed border-gray-300 z-10 animate-spin hover:paused"
-          style={{ animationDuration: "30s" }}
+          className="all-flags flex justify-center rounded-full w-[290px] md:w-[500px] h-[290px] md:h-[500px] sm:w-[300px] sm:h-[300px] absolute top-0 md:border-2 border-dashed border-gray-300 z-10 animate-spin hover:paused"
+          style={{ animationDuration: "20s" }}
         >
           {/* Australia */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center -top-[26px] left-[147px] lg:left-60 lg:-top-9">
+              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center -top-[26px] left-[147px] md:left-60 md:-top-9 ">
                 <Image src={australia} alt="Australia" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -57,7 +57,7 @@ const FlagOrbit = () => {
           {/* Canada */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[7px] lg:top-0.5 left-[97px] right-[25px] lg:right-[85px]">
+              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[7px] lg:top-0.5 md:left-[97px]  md:right-[85px]">
                 <Image src={canada} alt="Canada" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -69,7 +69,7 @@ const FlagOrbit = () => {
           {/* China */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-20 lg:top-[5px] -right-4 lg:right-[85px]">
+              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-20 md:top-[5px] -right-4 md:right-[85px]">
                 <Image src={china} alt="China" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -81,7 +81,7 @@ const FlagOrbit = () => {
           {/* France */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-[84px] lg:top-[114px] -right-[19px] lg:-right-[5px]">
+              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-[84px] md:top-[114px] -right-[19px] md:-right-[5px]">
                 <Image src={france} alt="France" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -93,7 +93,7 @@ const FlagOrbit = () => {
           {/* Germany */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-4 lg:bottom-[186px] right-4 lg:-right-[30px]">
+              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-4 md:bottom-[186px] right-4 md:-right-[30px]">
                 <Image src={germany} alt="Germany" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -105,7 +105,7 @@ const FlagOrbit = () => {
           {/* Japan */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] -bottom-5 lg:bottom-14 right-[110px] lg:right-[30px]">
+              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] -bottom-5 md:bottom-14 right-[110px] md:right-[30px]">
                 <Image src={japan} alt="Japan" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -117,7 +117,7 @@ const FlagOrbit = () => {
           {/* Korea */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] lg:-bottom-3.5 -bottom-1 left-[55px] lg:left-[295px]">
+              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] md:-bottom-3.5 -bottom-1 left-[55px] md:left-[295px]">
                 <Image src={korea} alt="Korea" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -129,7 +129,7 @@ const FlagOrbit = () => {
           {/* Pakistan */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-14 lg:-bottom-3.5 -left-[9px] lg:left-[135px]">
+              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-14 md:-bottom-3.5 -left-[9px] md:left-[135px]">
                 <Image src={pakistan} alt="Pakistan" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -141,7 +141,7 @@ const FlagOrbit = () => {
           {/* Sri Lanka */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-[134px] lg:bottom-[66px] lg:left-[23px]">
+              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-[134px] md:bottom-[66px] md:left-[23px]">
                 <Image src={srilanka} alt="Sri Lanka" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -153,7 +153,7 @@ const FlagOrbit = () => {
           {/* UK */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[35px] lg:top-60 left-.5 lg:-left-6">
+              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[35px] md:top-60 left-.5 md:-left-6">
                 <Image src={uk} alt="UK" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -165,7 +165,7 @@ const FlagOrbit = () => {
           {/* USA */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 lg:w-[60px] h-10 lg:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] -top-[19px] lg:top-[107px] left-[69px] lg:left-0">
+              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] -top-[19px] md:top-[107px] left-[69px] md:left-0">
                 <Image src={usa} alt="USA" width={60} height={60} />
               </div>
             </TooltipTrigger>
@@ -175,7 +175,7 @@ const FlagOrbit = () => {
           </Tooltip>
         </div>
       </div>
-    </TooltipProvider>
+   
   );
 };
 
