@@ -22,160 +22,157 @@ import {
 
 const FlagOrbit = () => {
   return (
-    
-      <div className="relative flex items-center justify-center md:w-[500px] md:h-[500px] w-[290px] h-[290px] sm:w-[300px] sm:h-[300px] mx-auto">
-        {/* World map */}
+    <div className="relative flex items-center justify-center md:w-[500px] md:h-[500px] w-[290px] h-[290px] sm:w-[300px] sm:h-[300px] mx-auto">
+      {/* World map */}
 
-        <div className="relative">
-          <Image
-            src={worldmap}
-            alt="world map"
-            width={500}
-            height={500}
-            className="w-10/12 mx-auto md:w-full relative z-10"
-          />
-        </div>
-
-        {/* All flags container */}
-        <div
-          className="all-flags flex justify-center rounded-full w-[290px] md:w-[500px] h-[290px] md:h-[500px] sm:w-[300px] sm:h-[300px] absolute top-0 border-2 border-dashed border-gray-300 z-10 animate-spin hover:paused"
-          style={{ animationDuration: "30s" }}
-        >
-          {/* Australia */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center -top-[21px] left-[130px] md:left-60 md:-top-9 ">
-                <Image src={australia} alt="Australia" width={60} height={60} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
-              Australia
-            </TooltipContent>
-          </Tooltip>
-
-
-          {/* Canada */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-18 -right-1 md:top-0.5 md:left-[97px]  md:right-[85px]">
-                <Image src={canada} alt="Canada" width={60} height={60} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
-              Canada
-            </TooltipContent>
-          </Tooltip>
-
-          {/* China */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1]  top-1 right-9 md:top-[5px]  md:right-[85px]">
-                <Image src={china} alt="China" width={60} height={60} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
-              China
-            </TooltipContent>
-          </Tooltip>
-
-          {/* France */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-3 right-52 md:top-[114px]  md:-right-[5px]">
-                <Image src={france} alt="France" width={60} height={60} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
-              France
-            </TooltipContent>
-          </Tooltip>
-
-          {/* Germany */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] right-[260px] bottom-[90px]  md:bottom-[186px]  md:-right-[30px]">
-                <Image src={germany} alt="Germany" width={60} height={60} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
-              Germany
-            </TooltipContent>
-          </Tooltip>
-
-          {/* Japan */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] -bottom-5 md:bottom-14 right-[90px] md:right-[30px]">
-                <Image src={japan} alt="Japan" width={60} height={60} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
-              Japan
-            </TooltipContent>
-          </Tooltip>
-
-          {/* Korea */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] md:-bottom-3.5 -bottom-4 left-[90px] md:left-[295px]">
-                <Image src={korea} alt="Korea" width={60} height={60} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
-              Korea
-            </TooltipContent>
-          </Tooltip>
-
-          {/* Pakistan */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-5 md:-bottom-3.5 left-5 md:left-[135px]">
-                <Image src={pakistan} alt="Pakistan" width={60} height={60} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
-              Pakistan
-            </TooltipContent>
-          </Tooltip>
-
-          {/* Sri Lanka */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-42 -left-4 md:bottom-[66px] md:left-[23px]">
-                <Image src={srilanka} alt="Sri Lanka" width={60} height={60} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
-              Sri Lanka
-            </TooltipContent>
-          </Tooltip>
-
-          {/* UK */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[150px] left-[260px] md:top-60 left-.5 md:-left-6">
-                <Image src={uk} alt="UK" width={60} height={60} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
-              United Kingdom
-            </TooltipContent>
-          </Tooltip>
-
-          {/* USA */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-56 left-[233px] md:top-[107px]  md:left-0">
-                <Image src={usa} alt="USA" width={60} height={60} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
-              United States
-            </TooltipContent>
-          </Tooltip>
-        </div>
+      <div className="relative">
+        <Image
+          src={worldmap}
+          alt="world map"
+          width={500}
+          height={500}
+          className="w-10/12 mx-auto md:w-full relative z-10"
+        />
       </div>
-   
+
+      {/* All flags container */}
+      <div
+        className="all-flags flex justify-center rounded-full w-[290px] md:w-[500px] h-[290px] md:h-[500px] sm:w-[300px] sm:h-[300px] absolute top-0 border-2 border-dashed border-gray-300 z-10 animate-spin hover:paused"
+        style={{ animationDuration: "30s" }}
+      >
+        {/* Australia */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center -top-[21px] left-[130px] md:left-60 md:-top-9 ">
+              <Image src={australia} alt="Australia" width={60} height={60} />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
+            Australia
+          </TooltipContent>
+        </Tooltip>
+
+        {/* Canada */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-18 -right-1 md:top-0.5 md:left-[97px]  md:right-[85px]">
+              <Image src={canada} alt="Canada" width={60} height={60} />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
+            Canada
+          </TooltipContent>
+        </Tooltip>
+
+        {/* China */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1]  top-1 right-9 md:top-[5px]  md:right-[85px]">
+              <Image src={china} alt="China" width={60} height={60} />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
+            China
+          </TooltipContent>
+        </Tooltip>
+
+        {/* France */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-3 right-52 md:top-[114px]  md:-right-[5px]">
+              <Image src={france} alt="France" width={60} height={60} />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
+            France
+          </TooltipContent>
+        </Tooltip>
+
+        {/* Germany */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] right-[260px] bottom-[90px]  md:bottom-[186px]  md:-right-[30px]">
+              <Image src={germany} alt="Germany" width={60} height={60} />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
+            Germany
+          </TooltipContent>
+        </Tooltip>
+
+        {/* Japan */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] -bottom-5 md:bottom-14 right-[90px] md:right-[30px]">
+              <Image src={japan} alt="Japan" width={60} height={60} />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
+            Japan
+          </TooltipContent>
+        </Tooltip>
+
+        {/* Korea */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] md:-bottom-3.5 -bottom-4 left-[90px] md:left-[295px]">
+              <Image src={korea} alt="Korea" width={60} height={60} />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
+            Korea
+          </TooltipContent>
+        </Tooltip>
+
+        {/* Pakistan */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-5 md:-bottom-3.5 left-5 md:left-[135px]">
+              <Image src={pakistan} alt="Pakistan" width={60} height={60} />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
+            Pakistan
+          </TooltipContent>
+        </Tooltip>
+
+        {/* Sri Lanka */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] bottom-42 -left-4 md:bottom-[66px] md:left-[23px]">
+              <Image src={srilanka} alt="Sri Lanka" width={60} height={60} />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
+            Sri Lanka
+          </TooltipContent>
+        </Tooltip>
+
+        {/* UK */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-[150px] left-[260px] md:top-60 left-.5 md:-left-6">
+              <Image src={uk} alt="UK" width={60} height={60} />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
+            United Kingdom
+          </TooltipContent>
+        </Tooltip>
+
+        {/* USA */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flags-reverse absolute z-10 w-10 md:w-[60px] h-10 md:h-[60px] rounded-full flex items-center justify-center bg-[#e6e3f1] top-56 left-[233px] md:top-[107px]  md:left-0">
+              <Image src={usa} alt="USA" width={60} height={60} />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="bg-white/90 text-black dark:bg-black/90 dark:text-white">
+            United States
+          </TooltipContent>
+        </Tooltip>
+      </div>
+    </div>
   );
 };
 
