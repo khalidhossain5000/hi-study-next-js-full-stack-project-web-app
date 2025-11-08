@@ -99,7 +99,7 @@ const Login = () => {
           </div>
 
           <AnimatedButton
-            className="bg-linear-to-r from-[#b966e7] to-[#394ef4] hover:scale-105 lg:p-6 text-white w-full"
+            className="bg-linear-to-r from-[#b966e7] to-[#394ef4] hover:scale-105 lg:p-6 text-white w-full css"
             variant="default"
             size="default"
             glow={false}

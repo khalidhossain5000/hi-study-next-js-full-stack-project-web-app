@@ -51,3 +51,22 @@ body {
 .flags-reverse {
   animation: roading-falgs-reverse 30s linear infinite;
 }
+
+
+
+
+
+
+
+
+
+.css:before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px;
+    box-shadow: 0px 1.06px 12.11px 0px #3D1E86B0,0px 0.27px 11.74px 0px #201047 inset;
+}
