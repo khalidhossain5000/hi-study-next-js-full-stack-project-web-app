@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
+    // getting name
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
@@ -23,7 +24,7 @@ const Register = () => {
       password
     })
    console.log(result,'result from register')
-   toast.success("Registered successfully! h");
+   toast.success("Registered successfully!");
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0e1015] text-white px-4">
