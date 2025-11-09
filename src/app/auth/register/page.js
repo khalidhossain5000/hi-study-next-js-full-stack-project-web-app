@@ -18,7 +18,7 @@ const Register = () => {
 
     const result=await signIn("credentials",{
       redirect:true,
-      callbackUrl:"/",
+      // callbackUrl:"/",
       name,
       email,
       password

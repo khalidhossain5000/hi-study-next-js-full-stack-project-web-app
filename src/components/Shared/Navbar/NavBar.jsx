@@ -9,7 +9,7 @@ import Button from "../Button/Button";
 import { ModeToggle } from "../ThemeToggle/ThemeToggle";
 import HomeResponsiveMenu from "../ResponsiveMenu/HomeMenu/HomeResponsiveMenu";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { AnimatedButton } from "@/components/ui/animated-button";
 import {
   Tooltip,
@@ -84,6 +84,7 @@ const NavBar = () => {
                     shimmerDuration="2s"
                     borderRadius="10px"
                     background="rgba(0, 0, 0, 1)"
+                     onClick={() => signOut({ callbackUrl: "/" })}
                   >
                     Log Out
                   </AnimatedButton>
