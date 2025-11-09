@@ -101,16 +101,7 @@
 // const handler = NextAuth(authOptions);
 // export { handler as GET, handler as POST };
 
-
-
-
-
 // new code
-
-
-
-
-
 
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
@@ -197,9 +188,7 @@ export const authOptions = {
             email: user.email,
             name: user.name,
             role: "student",
-            profileImage:
-              user.image ||
-              "https://i.ibb.co/zVB99J4d/DEFAULT.jpg", // google profile image
+            profileImage: user.image || "https://i.ibb.co/zVB99J4d/DEFAULT.jpg", // google profile image
             timeCreated: new Date(),
           });
         }
@@ -213,7 +202,9 @@ export const authOptions = {
         token.id = user._id?.toString() || user.id;
         token.role = user.role || "student";
         token.profileImage =
-          user.profileImage || user.image || "https://i.ibb.co/zVB99J4d/DEFAULT.jpg";
+          user.profileImage ||
+          user.image ||
+          "https://i.ibb.co/zVB99J4d/DEFAULT.jpg";
       }
       return token;
     },
@@ -232,11 +223,3 @@ export const authOptions = {
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
-
-
-
-
-
-
-
-

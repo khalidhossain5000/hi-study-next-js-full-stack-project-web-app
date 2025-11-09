@@ -1,33 +1,61 @@
-'use client';
+"use client";
 import React from "react";
 import bgImage from "../../../assets/student-bg/n.jpg";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { BookText } from "lucide-react";
+import ButtonIcon from "@/components/Shared/Button/ButtonIcon";
 const DashboardBanner = () => {
-    const {data:session}=useSession();
+  const { data: session } = useSession();
   return (
     <div className="">
-      <div className="bg-linear-[270deg,#394ef4,#ba66e7] dark:bg-linear-[90deg,#2f57efbf,#oc586eeab]   opacity-50 h-full w-full lg:pt-[60px] lg:pb-[250px] py-20 md:px-10 z-0 relative"></div>
+      <div className="bg-linear-[270deg,#394ef4,#ba66e7] dark:bg-linear-[90deg,#2f57efbf,#oc586eeab] opacity-50 h-full w-full lg:pt-[60px] lg:pb-[250px] py-20 md:px-10 z-0 relative"></div>
       <div
-        className="bg-imgwith-info container mx-auto bg-no-repeat bg-cover bg-center rounded-lg flex flex-col md:flex-row items-center justify-between py-52 px-12 -mt-52 z-10 relative"
+        className="bg-info container mx-auto bg-no-repeat bg-cover bg-center rounded-lg flex flex-col md:flex-row items-center justify-between py-16 px-6 lg:py-36 lg:px-12 -mt-24 lg:-mt-52 z-10 relative "
         style={{ backgroundImage: `url(${bgImage.src})` }}
       >
-        <div className="">
-          <h2 class="text-2xl xl:text-5xl font-gabriela font-bold bg-linear-to-r from-[#b966e7] via-gray-100 to-[#eeeeee] bg-clip-text text-transparent">
-  Reach Higher, Achieve More
-</h2>
-<p className="text-lg lg:text-xl font-medium font-poppins text-stone-200 max-w-md py-3 lg:py-5">Every step you take today builds the success of tomorrow.</p>
+        <div className=" w-full ">
+          <div className="contents text-center lg:text-left">
+            <h2 className="text-xl sm:text-2xl xl:text-5xl font-gabriela font-bold bg-linear-to-r from-[#b966e7] via-gray-100 to-[#eeeeee] bg-clip-text text-transparent">
+            Reach Higher, Achieve More
+          </h2>
+          <p className="mx-auto lg:mx-0 text-lg lg:text-xl font-medium font-poppins text-stone-200 max-w-md py-3 lg:py-5">
+            Every step you take today builds the success of tomorrow.
+          </p>
+          </div>
 
-<div className="imgandbtnsh">
-    <div className="profileimg">
-        <div className="img">
-        <Image
-        
-        />
-        </div>
-        <div className="name"></div>
-    </div>
-</div>
+          <div className="imgandbtnsh flex flex-col lg:flex-row items-center gap-6 lg:gap-8 justify-center lg:justify-between w-full pt-0 lg:pt-6">
+            <div className="profileimg flex items-center gap-4 mt-2 lg:mt-5">
+              <div className="img">
+                <Image
+                  src={session?.user?.profileImage}
+                  alt="profile image"
+                  className="rounded-full border-2 border-white p-1"
+                  height={90}
+                  width={90}
+                />
+              </div>
+              <div className="name">
+                <h4 className="text-lg lg:text-xl font-semibold lg:font-bold text-white">
+                  {session?.user?.name}
+                </h4>
+                {session?.user?.role === "student" && (
+                  <p className="text-md font-medium text-stone-200 flex items-center mt-2 gap-2">
+                    <BookText />0 Courses Enrolled
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="btns">
+                {
+                    session?.user?.role === "student" && (
+                        <ButtonIcon>
+                        Buy Courses
+                      </ButtonIcon>
+                    )
+                }
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -35,5 +63,3 @@ const DashboardBanner = () => {
 };
 
 export default DashboardBanner;
-
-
