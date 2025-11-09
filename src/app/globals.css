@@ -11,6 +11,15 @@ body {
   --color-text-primary: var(--text-primary);
   --font-poppins: var(--font-poppins);
   --font-gabriela: var(--font-gabriela);
+  --animate-shiny-text: shiny-text 8s infinite;
+  @keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;
+    }
+  30%, 60% {
+    background-position: calc(100% + var(--shiny-width)) 0;
+    }
+  }
 }
 
 :root {
@@ -25,7 +34,6 @@ body {
   --text-primary: #000000;
 }
 
-
 /* @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -34,8 +42,6 @@ body {
     @apply bg-background text-foreground;
   }
 } */
-
-
 
 /* flag rotate  */
 /* Reverse rotation */
@@ -52,21 +58,13 @@ body {
   animation: roading-falgs-reverse 30s linear infinite;
 }
 
+/* test code starts from here s */
 
-
-
-
-
-
-
-
-.css:before {
-    content: '';
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 20px;
-    box-shadow: 0px 1.06px 12.11px 0px #3D1E86B0,0px 0.27px 11.74px 0px #201047 inset;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
