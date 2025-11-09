@@ -2,7 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["i.ibb.co"], // whitelist your image host here
+    domains: [
+      "i.ibb.co",                  
+      "lh3.googleusercontent.com", 
+    ],
   },
 };
 
