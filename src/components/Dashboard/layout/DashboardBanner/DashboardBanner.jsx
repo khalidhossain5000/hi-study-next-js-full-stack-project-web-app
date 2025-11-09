@@ -41,7 +41,7 @@ const DashboardBanner = () => {
         </nav>
       </header>
       {/* banner section this is here */}
-      <div className="bg-linear-[270deg,#394ef4,#ba66e7] dark:bg-linear-[90deg,#2f57efbf,#oc586eeab] opacity-50 h-full w-full lg:pt-[60px] lg:pb-[250px] py-20 md:px-10 z-0 relative"></div>
+      <div className="bg-linear-[270deg,#394ef4,#ba66e7] dark:bg-linear-to-r from-[#394ef4] via-[#ba66e7] to-[#00f2ff] opacity-50 h-full w-full lg:pt-[60px] lg:pb-[250px] py-20 md:px-10 z-0 relative"></div>
       <div
         className="bg-info container mx-auto bg-no-repeat bg-cover bg-center rounded-lg flex flex-col md:flex-row items-center justify-between py-16 px-6 lg:py-[100px] lg:px-12 -mt-24 lg:-mt-52 z-10 relative "
         style={{ backgroundImage: `url(${bgImage.src})` }}
