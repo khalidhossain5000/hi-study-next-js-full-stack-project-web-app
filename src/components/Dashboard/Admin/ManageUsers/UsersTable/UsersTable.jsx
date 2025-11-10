@@ -46,8 +46,6 @@ const UsersTable = () => {
         let msg = "";
         if (roleAction === "makeAdmin")
           msg = "User promoted to Admin successfully!";
-        else if (roleAction === "makeInstructor")
-          msg = "User promoted to Instructor successfully!";
         else if (roleAction === "makeStudent")
           msg = "User role reset to Student successfully!";
 
@@ -158,16 +156,6 @@ const UsersTable = () => {
                         </button>
                       )}
 
-                      {user.role === "admin" && (
-                        <button
-                          onClick={() =>
-                            handleRoleChange(user._id, "makeInstructor")
-                          }
-                          className="px-3 py-1 text-xs font-medium rounded-md bg-yellow-100 text-yellow-600 hover:bg-yellow-600 hover:text-white transition"
-                        >
-                          Make Instructor
-                        </button>
-                      )}
                       {user.role === "admin" && (
                         <button
                           onClick={() =>

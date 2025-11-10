@@ -1,28 +1,121 @@
+"use client";
 import React from "react";
+import styled from "styled-components";
 
 const ButtonIcon = ({ children }) => {
   return (
-    <button className="bg-linear-to-r from-[#394ef4] to-[#b966e7] relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-white border border-indigo-200 rounded-lg hover:text-white group hover:bg-gray-50 cursor-pointer">
-      <span className="absolute left-0 block w-full h-0 transition-all bg-linear-to-r from-[#b966e7] to-[#394ef4] opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
-      <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
+    <StyledWrapper>
+      <button className="animated-button">
         <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
+          className="arr-2"
+          viewBox="0 0 24 24"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M14 5l7 7m0 0l-7 7m7-7H3"
-          />
+          <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
         </svg>
-      </span>
-      <span className="relative">{children}</span>
-    </button>
+        <span className="text">{children}</span>
+        <span className="circle" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="arr-1"
+          viewBox="0 0 24 24"
+        >
+          <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+        </svg>
+      </button>
+    </StyledWrapper>
   );
 };
+
+const StyledWrapper = styled.div`
+  .animated-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 16px 36px;
+    border: 1px solid;
+    border-color: transparent;
+    font-size: 16px;
+    background: linear-gradient(to right, #394ef4, #b966e7);
+    border-radius: 05px;
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 0 0 2px #ffffff;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .animated-button svg {
+    position: absolute;
+    width: 24px;
+    fill: #ffffff;
+    z-index: 9;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .animated-button .arr-1 {
+    right: 16px;
+  }
+
+  .animated-button .arr-2 {
+    left: -25%;
+  }
+
+  .animated-button .circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: #c5e5e4;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .animated-button .text {
+    position: relative;
+    z-index: 1;
+    transform: translateX(-12px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .animated-button:hover {
+    box-shadow: 0 0 0 12px transparent;
+    color: #212121;
+    border-radius: 5px;
+  }
+
+  .animated-button:hover .arr-1 {
+    right: -25%;
+  }
+
+  .animated-button:hover .arr-2 {
+    left: 16px;
+  }
+
+  .animated-button:hover .text {
+    transform: translateX(12px);
+  }
+
+  .animated-button:hover svg {
+    fill: #1f387e;
+  }
+
+  .animated-button:active {
+    scale: 0.95;
+    box-shadow: 0 0 0 4px greenyellow;
+  }
+
+  .animated-button:hover .circle {
+    width: 220px;
+    height: 220px;
+    opacity: 1;
+    
+  }
+`;
 
 export default ButtonIcon;

@@ -29,9 +29,9 @@ export async function GET() {
   }
 }
 
-// make admin api start from here
+// make admin and remove admin via actions api start from here
 
-// app/api/admin/users/route.js
+
 
 export async function PATCH(req) {
   try {
@@ -48,7 +48,6 @@ export async function PATCH(req) {
     let newRole;
 
     if (action === "makeAdmin") newRole = "admin";
-    else if (action === "makeInstructor") newRole = "instructor";
     else if (action === "makeStudent") newRole = "student"; // default role
     else return NextResponse.json({ success: false, message: "Invalid action" }, { status: 400 });
 

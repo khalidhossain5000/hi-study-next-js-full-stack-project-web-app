@@ -1,5 +1,5 @@
 "use client";
-import { BookOpen, House } from "lucide-react";
+import { BookOpen, House, School } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -22,6 +22,11 @@ const Sidebar = () => {
         name: "Manage Users",
         path: "/dashboard/admin/manage-users",
         icon: <BookOpen className="w-5 h-5" />,
+      },
+      {
+        name: "Add Course",
+        path: "/dashboard/admin/add-courses",
+        icon: <School className="w-5 h-5" />,
       },
     ];
   }

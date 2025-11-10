@@ -67,8 +67,6 @@ const UsersCard = () => {
         let msg = "";
         if (roleAction === "makeAdmin")
           msg = "User promoted to Admin successfully!";
-        else if (roleAction === "makeInstructor")
-          msg = "User promoted to Instructor successfully!";
         else if (roleAction === "makeStudent")
           msg = "User role reset to Student successfully!";
 
@@ -215,17 +213,7 @@ const UsersCard = () => {
                       <span>Remove Admin/Instructor</span>
                     </button>
                   )}
-                  {user.role === "admin" && (
-                    <button
-                      onClick={() =>
-                        handleRoleChange(user._id, "makeInstructor")
-                      }
-                      className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white py-3 px-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                    >
-                      <ShieldOff className="w-4 h-4 hidden md:block" />
-                      <span>Make Instructor</span>
-                    </button>
-                  )}
+
                   <button
                     onClick={() => handleDeleteUser(user._id)}
                     className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white py-3 px-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 min-w-[100px]"
