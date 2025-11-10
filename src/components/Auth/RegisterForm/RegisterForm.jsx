@@ -20,6 +20,8 @@ const RegisterForm = () => {
       email,
       password,
       name,
+      role:'student',
+      profileImage:'https://i.ibb.co/zVB99J4d/DEFAULT.jpg'
     };
     try{
 const result = await axios.post("/api/auth/register", userInfo);

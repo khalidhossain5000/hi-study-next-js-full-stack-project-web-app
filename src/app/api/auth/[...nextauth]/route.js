@@ -229,94 +229,78 @@
 
 
 
-
-
-
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { getCollection } from "@/lib/collections";
 import bcrypt from "bcrypt";
+import { ObjectId } from "mongodb";
 
 export const authOptions = {
   providers: [
-    // Google OAuth
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
-
-    // Email/Password login
     CredentialsProvider({
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-
       async authorize(credentials) {
         const usersCollection = await getCollection("users");
-
-        // Check if user exists
         const user = await usersCollection.findOne({ email: credentials.email });
-
-        if (!user) {
-          // Prevent login if not registered
-          return null; // NextAuth এর জন্য null return করলে proper error হবে
-        }
-
-        // Compare password
+        if (!user) return null;
         const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
-        if (!isPasswordValid) {
-          return null; // Invalid password
-        }
-
-        return user; // Login successful
+        if (!isPasswordValid) return null;
+        return { id: user._id.toString(), name: user.name, email: user.email }; // immutable info
       },
     }),
   ],
-
-  session: {
-    strategy: "jwt",
-  },
-
-  pages: {
-    signIn: "/auth/login", // Custom login page
-  },
+  session: { strategy: "jwt" },
+  pages: { signIn: "/auth/login" },
 
   callbacks: {
     async signIn({ user, account }) {
       const usersCollection = await getCollection("users");
 
-      // Handle Google OAuth first time login
       if (account?.provider === "google") {
         const existingUser = await usersCollection.findOne({ email: user.email });
         if (!existingUser) {
-          await usersCollection.insertOne({
+          const inserted = await usersCollection.insertOne({
             email: user.email,
             name: user.name,
             role: "student",
             profileImage: user.image || "https://i.ibb.co/zVB99J4d/DEFAULT.jpg",
             timeCreated: new Date(),
           });
+          user.id = inserted.insertedId.toString(); // make sure JWT has id
+        } else {
+          user.id = existingUser._id.toString();
         }
       }
+
       return true;
     },
 
     async jwt({ token, user }) {
-      if (user) {
-        token.id = user._id?.toString() || user.id;
-        token.role = user.role || "student";
-        token.profileImage = user.profileImage || user.image || "https://i.ibb.co/zVB99J4d/DEFAULT.jpg";
-      }
+      // Attach id for both Google and Credentials login
+      if (user) token.id = user.id || user._id?.toString();
       return token;
     },
 
     async session({ session, token }) {
+      // Fetch latest info from DB
+      const usersCollection = await getCollection("users");
+      const dbUser = await usersCollection.findOne({ _id: new ObjectId(token.id) });
+
       session.user.id = token.id;
-      session.user.role = token.role;
-      session.user.profileImage = token.profileImage;
+      session.user.role = dbUser?.role || "student";
+      session.user.name = dbUser?.name || "Unknown";
+      session.user.email = dbUser?.email || null;
+      session.user.profileImage = dbUser?.profileImage || "https://i.ibb.co/zVB99J4d/DEFAULT.jpg";
+
       return session;
     },
   },
@@ -324,11 +308,8 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-// Export for App Router
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
-
-
 
 
 
