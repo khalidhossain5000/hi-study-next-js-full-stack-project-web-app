@@ -43,7 +43,8 @@ const NavBar = () => {
               <ModeToggle />
             </div>
             <div className="hidden lg:flex items-center gap-6">
-              <div>
+              {
+                session?.user && <div>
                 {/* user name showing on tooltip image hover */}
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -63,6 +64,7 @@ const NavBar = () => {
                   </TooltipContent>
                 </Tooltip>
               </div>
+              }
               <div>
                 {!session?.user ? (
                   <Link href={`/auth/login`}>
