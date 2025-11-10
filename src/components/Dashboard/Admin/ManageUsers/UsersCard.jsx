@@ -55,36 +55,28 @@ const UsersCard = () => {
     );
 
   // make admin api
-  const handleMakeAdmin = async (userId) => {
+  const handleRoleChange = async (userId, roleAction) => {
     try {
       const res = await axios.patch(
-        `/api/admin/users?id=${userId}&action=make`
+        `/api/admin/users?id=${userId}&action=${roleAction}`
       );
       console.log(res.data);
-      if (res.data.success) {
-        refetch();
-        toast.success("User promoted to Admin successfully!");
-      }
-    } catch (error) {
-      console.error("Error promoting user:", error);
-      toast.error("Failed to make admin!");
-    }
-  };
 
-  // remove admin api
-  const handleRemoveAdmin = async (userId) => {
-    try {
-      const res = await axios.patch(
-        `/api/admin/users?id=${userId}&action=remove`
-      );
-      console.log(res.data);
       if (res.data.success) {
         refetch();
-        toast.success("Admin removed successfully!");
+        let msg = "";
+        if (roleAction === "makeAdmin")
+          msg = "User promoted to Admin successfully!";
+        else if (roleAction === "makeInstructor")
+          msg = "User promoted to Instructor successfully!";
+        else if (roleAction === "makeStudent")
+          msg = "User role reset to Student successfully!";
+
+        toast.success(msg);
       }
     } catch (error) {
-      console.error("Error removing admin:", error);
-      toast.error("Failed to remove admin!");
+      console.error("Error updating role:", error);
+      toast.error("Failed to update role!");
     }
   };
 
@@ -139,49 +131,6 @@ const UsersCard = () => {
             Manage user roles and permissions with ease
           </p>
         </div>
-
-        {/* Stats
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-lg">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">Total Users</p>
-                <p className="text-3xl font-bold text-gray-800 dark:text-white">{AllUsers.length}</p>
-              </div>
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                <User className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-lg">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">Admins</p>
-                <p className="text-3xl font-bold text-gray-800 dark:text-white">
-                  {AllUsers.filter(user => user.role === 'admin').length}
-                </p>
-              </div>
-              <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl">
-                <Crown className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-lg">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">Students</p>
-                <p className="text-3xl font-bold text-gray-800 dark:text-white">
-                  {AllUsers.filter(user => user.role === 'student').length}
-                </p>
-              </div>
-              <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-xl">
-                <GraduationCap className="w-6 h-6 text-green-600 dark:text-green-400" />
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         {/* Users Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -251,7 +200,7 @@ const UsersCard = () => {
                 <div className="flex flex-col sm:flex-row gap-2">
                   {user.role === "student" ? (
                     <button
-                      onClick={() => handleMakeAdmin(user._id)}
+                      onClick={() => handleRoleChange(user._id, "makeAdmin")}
                       className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-[#394ef4] to-[#5a6ef7] hover:from-[#2d3fd0] hover:to-[#4a5bef] text-white py-3 px-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                     >
                       <Shield className="w-4 h-4 hidden md:block" />
@@ -259,14 +208,24 @@ const UsersCard = () => {
                     </button>
                   ) : (
                     <button
-                      onClick={() => handleRemoveAdmin(user._id)}
+                      onClick={() => handleRoleChange(user._id, "makeStudent")}
                       className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white py-3 px-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                     >
                       <ShieldOff className="w-4 h-4 hidden md:block" />
-                      <span>Remove Admin</span>
+                      <span>Remove Admin/Instructor</span>
                     </button>
                   )}
-
+                  {user.role === "admin" && (
+                    <button
+                      onClick={() =>
+                        handleRoleChange(user._id, "makeInstructor")
+                      }
+                      className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white py-3 px-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                    >
+                      <ShieldOff className="w-4 h-4 hidden md:block" />
+                      <span>Make Instructor</span>
+                    </button>
+                  )}
                   <button
                     onClick={() => handleDeleteUser(user._id)}
                     className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white py-3 px-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 min-w-[100px]"

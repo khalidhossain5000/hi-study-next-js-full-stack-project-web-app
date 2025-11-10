@@ -31,32 +31,43 @@ export async function GET() {
 
 // make admin api start from here
 
+// app/api/admin/users/route.js
+
 export async function PATCH(req) {
   try {
     const userCollection = await getCollection("users");
+
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
     const action = searchParams.get("action");
-    const role = action === "make" ? "admin" : "student";
+
+    if (!id || !action) {
+      return NextResponse.json({ success: false, message: "Missing parameters" }, { status: 400 });
+    }
+
+    let newRole;
+
+    if (action === "makeAdmin") newRole = "admin";
+    else if (action === "makeInstructor") newRole = "instructor";
+    else if (action === "makeStudent") newRole = "student"; // default role
+    else return NextResponse.json({ success: false, message: "Invalid action" }, { status: 400 });
+
     const result = await userCollection.updateOne(
       { _id: new ObjectId(id) },
-      { $set: { role } }
+      { $set: { role: newRole } }
     );
 
-    return NextResponse.json({ success: true, updated: result });
+    if (result.modifiedCount === 0) {
+      return NextResponse.json({ success: false, message: "User not found or role unchanged" }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true, message: `Role updated to ${newRole}` });
   } catch (error) {
-    console.error("Error Making Admin to users:", error);
-
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Failed to make admin ",
-        error: error.message,
-      },
-      { status: 500 }
-    );
+    console.error("Error updating role:", error);
+    return NextResponse.json({ success: false, message: "Server error" }, { status: 500 });
   }
 }
+
 
 //delete user api starts here
 export async function DELETE(req) {

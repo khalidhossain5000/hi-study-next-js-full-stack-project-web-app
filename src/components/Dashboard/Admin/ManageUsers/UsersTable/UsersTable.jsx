@@ -33,37 +33,29 @@ const UsersTable = () => {
   if (isLoading) return <h2 className="text-white">Loading users...</h2>;
   console.log(AllUsers, "this is all users");
   if (error) return <h2 className="text-red-500">Error loading users</h2>;
-  // make admin api is stars here
-   const handleMakeAdmin = async (userId) => {
-    try {
-      const res = await axios.patch(
-        `/api/admin/users?id=${userId}&action=make`
-      );
-      console.log(res.data);
-      if (res.data.success) {
-        refetch();
-        toast.success("User promoted to Admin successfully!");
-      }
-    } catch (error) {
-      console.error("Error promoting user:", error);
-      toast.error("Failed to make admin!");
-    }
-  };
 
-  //remove admin api starts here
-  const handleRemoveAdmin = async (userId) => {
+  const handleRoleChange = async (userId, roleAction) => {
     try {
       const res = await axios.patch(
-        `/api/admin/users?id=${userId}&action=remove`
+        `/api/admin/users?id=${userId}&action=${roleAction}`
       );
       console.log(res.data);
+
       if (res.data.success) {
         refetch();
-        toast.success("Admin removed successfully!");
+        let msg = "";
+        if (roleAction === "makeAdmin")
+          msg = "User promoted to Admin successfully!";
+        else if (roleAction === "makeInstructor")
+          msg = "User promoted to Instructor successfully!";
+        else if (roleAction === "makeStudent")
+          msg = "User role reset to Student successfully!";
+
+        toast.success(msg);
       }
     } catch (error) {
-      console.error("Error removing admin:", error);
-      toast.error("Failed to remove admin!");
+      console.error("Error updating role:", error);
+      toast.error("Failed to update role!");
     }
   };
 
@@ -82,14 +74,14 @@ const UsersTable = () => {
       if (result.isConfirmed) {
         try {
           const res = await axios.delete(`/api/admin/users?id=${userId}`);
-       
+
           if (res.data.success) {
             Swal.fire(
               "Deleted!",
               "User has been deleted successfully.",
               "success"
             );
-            refetch()
+            refetch();
           }
         } catch (error) {
           console.error("Error deleting user:", error);
@@ -157,22 +149,35 @@ const UsersTable = () => {
                     <div className="flex flex-wrap gap-2">
                       {user.role !== "admin" && (
                         <button
-                          onClick={() => handleMakeAdmin(user._id)}
+                          onClick={() =>
+                            handleRoleChange(user._id, "makeAdmin")
+                          }
                           className="px-3 py-1 text-xs font-medium rounded-md bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white transition"
                         >
                           Make Admin
                         </button>
                       )}
 
-                      {user.role === 'admin' && (
+                      {user.role === "admin" && (
                         <button
-                          onClick={() => handleRemoveAdmin(user._id)}
+                          onClick={() =>
+                            handleRoleChange(user._id, "makeInstructor")
+                          }
                           className="px-3 py-1 text-xs font-medium rounded-md bg-yellow-100 text-yellow-600 hover:bg-yellow-600 hover:text-white transition"
                         >
-                          Remove Admin
+                          Make Instructor
                         </button>
                       )}
-
+                      {user.role === "admin" && (
+                        <button
+                          onClick={() =>
+                            handleRoleChange(user._id, "makeStudent")
+                          }
+                          className="px-3 py-1 text-xs font-medium rounded-md bg-yellow-100 text-yellow-600 hover:bg-yellow-600 hover:text-white transition"
+                        >
+                          Make Student
+                        </button>
+                      )}
                       <button
                         onClick={() => handleDeleteUser(user._id)}
                         className="px-3 py-1 text-xs font-medium rounded-md bg-red-100 text-red-600 hover:bg-red-600 hover:text-white transition"
