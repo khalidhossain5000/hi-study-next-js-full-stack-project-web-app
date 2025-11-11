@@ -52,3 +52,10 @@ body {
 }
 
 /* test code starts from here s */
+
+
+
+
+.shadow{
+  box-shadow: 0px 6px 34px rgba(215, 216, 222, 0.41);
+}
