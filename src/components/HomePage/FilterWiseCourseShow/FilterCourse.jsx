@@ -7,6 +7,8 @@ import React, { useState } from "react";
 
 import CategoryButton from "./CategoryButton";
 import CourseCard from "./CourseCard";
+import ButtonIcon from "@/components/Shared/Button/ButtonIcon";
+import Link from "next/link";
 
 const FilterCourse = () => {
   const { data: allCourses = [], isLoading } = useQuery({
@@ -32,8 +34,18 @@ const FilterCourse = () => {
 
   return (
     <div className="py-10 text-center container mx-auto px-3 lg:px-0">
+      <div className="titles py-6 lg:py-9 space-y-3">
+        <h5 className="text-center text-sm lg:text-[18px] bg-linear-to-t from-[#394ef4] to-[#b966e7] bg-clip-text text-transparent font-bold">
+            Our Course
+          </h5>
+          <h2 className="text-2xl lg:text-3xl xl:text-[44px] text-[#192335] text-center font-semibold font-gabriela dark:text-gray-100">Limitless Learning, More</h2>
+           <h5 className="text-2xl lg:text-3xl xl:text-[44px] bg-linear-to-t from-[#394ef4] to-[#b966e7] bg-clip-text text-transparent font-poppins font-bold ">
+            Possibilities
+          </h5>
+
+      </div>
       {/* Category Buttons */}
-      <div className="flex flex-wrap justify-center gap-3 mb-6">
+      <div className="py-6 lg:py-9 xl:py-14 flex flex-wrap justify-center gap-3 mb-6">
         {categories.map((cat) => (
           <CategoryButton
             key={cat}
@@ -46,26 +58,22 @@ const FilterCourse = () => {
       </div>
 
       {/* Courses Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
+      <div className="py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
         {filteredCourses.map((course) => (
           <CourseCard key={course._id} course={course} />
         ))}
       </div>
 
       {/* View All Button */}
-      <div className="mt-8">
-        <button
-          onClick={() => {
-            if (activeCategory === "All") {
-              window.location.href = "/courses";
-            } else {
-              window.location.href = `/category/${activeCategory.toLowerCase()}`;
-            }
-          }}
-          className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg shadow-md hover:scale-105 transition"
-        >
+      <div className="mt-8 lg:mt-12  flex justify-center">
+        <Link href={'/all-courses'}>
+        <ButtonIcon>
+         
+          
+        
           View {activeCategory}
-        </button>
+        </ButtonIcon>
+        </Link>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +15,9 @@ import { format } from "date-fns";
 import { PlusCircle, Video } from "lucide-react";
 import ImageUpload from "../../layout/HandleImageUpload/CourseThumbnail/ImageUploader";
 import ChapterForm from "./ChapterForm";
+import PremiumChapterForm from "./PremiumChapterForm"; // new component for premium course content
 import axios from "axios";
+
 // Options
 const CATEGORY_OPTIONS = [
   "Web-Development",
@@ -25,7 +27,6 @@ const CATEGORY_OPTIONS = [
   "Marketing",
   "AI-&-ML",
 ];
-
 
 const CourseForm = () => {
   const [courseImage, setCourseImage] = useState(null);
@@ -38,9 +39,11 @@ const CourseForm = () => {
     defaultValues: {
       type: "free",
       chapters: [{ title: "", lessons: [{ title: "", videoUrl: "" }] }],
+      courseContents: [{ title: "", lessons: [{ title: "" }] }], // premium course content
     },
   });
 
+  // Free course chapters
   const {
     fields: chapterFields,
     append: addChapter,
@@ -50,19 +53,25 @@ const CourseForm = () => {
     name: "chapters",
   });
 
+  // Premium course content
+  const {
+    fields: courseContentsFields,
+    append: appendPremiumChapter,
+    remove: removePremiumChapter,
+  } = useFieldArray({
+    control,
+    name: "courseContents",
+  });
+
   const watchType = watch("type");
 
-  const onSubmit =async (data) => {
-    console.log("Course Data:", {
-      ...data,
-      courseImage,
-      instructorImage,
-      startDate,
-      endDate,
-      startTime,
-    });
+  const onSubmit = async (data) => {
+    
+
     const courseData = {
       ...data,
+      coursePrice:Number(data?.price),
+      maxStudents:Number(data?.maxStudents),
       courseImage,
       instructorImage,
       startDate,
@@ -70,8 +79,10 @@ const CourseForm = () => {
       startTime,
     };
 
-    const res=await axios.post('/api/admin/add-course',courseData)
-    console.log('this is res',res);
+    console.log("Course Data:", courseData);
+    const res = await axios.post("/api/admin/add-course", courseData);
+    console.log("Response:", res);
+
     reset();
     setCourseImage(null);
     setInstructorImage(null);
@@ -94,9 +105,9 @@ const CourseForm = () => {
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Course & Instructor Image Upload */}
-          <div className="grid md:grid-cols-2 gap-3 ">
+          <div className="grid md:grid-cols-2 gap-3">
             <div className="border-2 border-dashed border-gray-600 rounded-lg p-3">
-              <label className="block m-2 lg:m-0  lg:mb-2 font-medium">
+              <label className="block m-2 lg:m-0 lg:mb-2 font-medium">
                 Course Thumbnail
               </label>
               <ImageUpload
@@ -210,9 +221,7 @@ const CourseForm = () => {
                         variant="outline"
                         className="w-full dark:bg-gray-700 dark:border-gray-600"
                       >
-                        {startDate
-                          ? format(startDate, "PPP")
-                          : "Select Start Date"}
+                        {startDate ? format(startDate, "PPP") : "Select Start Date"}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="p-0 dark:bg-gray-800">
@@ -248,74 +257,102 @@ const CourseForm = () => {
             </div>
           )}
 
-          {/* Premium Course Fields */}
+          {/* Premium Course Fields + Course Content */}
           {watchType === "premium" && (
-            <div className="grid md:grid-cols-2 gap-6">
-              <input
-                {...register("price")}
-                type="number"
-                placeholder="Price"
-                className="p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
-              />
-              <input
-                {...register("maxStudents")}
-                type="number"
-                placeholder="Max Students"
-                className="p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
-              />
+            <div className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-6">
+                <input
+                  {...register("price")}
+                  type="number"
+                  placeholder="Price"
+                  className="p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                />
+                <input
+                  {...register("maxStudents")}
+                  type="number"
+                  placeholder="Max Students"
+                  className="p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                />
 
-              <input
-                {...register("batchName")}
-                placeholder="Batch Name"
-                className="p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
-              />
+                <input
+                  {...register("batchName")}
+                  placeholder="Batch Name"
+                  className="p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                />
 
-              {/* Start Date + Time as two fields in one row */}
-              <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-2">
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="w-full dark:bg-gray-700 dark:border-gray-600"
+                      >
+                        {startDate ? format(startDate, "PPP") : "Select Start Date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="p-0 dark:bg-gray-800">
+                      <ShadCalendar
+                        mode="single"
+                        selected={startDate}
+                        onSelect={setStartDate}
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <input
+                    type="time"
+                    className="p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                    value={startTime}
+                    onChange={(e) => setStartTime(e.target.value)}
+                  />
+                </div>
+
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
                       className="w-full dark:bg-gray-700 dark:border-gray-600"
                     >
-                      {startDate
-                        ? format(startDate, "PPP")
-                        : "Select Start Date"}
+                      {endDate ? format(endDate, "PPP") : "Select End Date"}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="p-0 dark:bg-gray-800">
                     <ShadCalendar
                       mode="single"
-                      selected={startDate}
-                      onSelect={setStartDate}
+                      selected={endDate}
+                      onSelect={setEndDate}
                     />
                   </PopoverContent>
                 </Popover>
-                <input
-                  type="time"
-                  className="p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
-                  value={startTime}
-                  onChange={(e) => setStartTime(e.target.value)}
-                />
               </div>
 
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="w-full dark:bg-gray-700 dark:border-gray-600"
-                  >
-                    {endDate ? format(endDate, "PPP") : "Select End Date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="p-0 dark:bg-gray-800">
-                  <ShadCalendar
-                    mode="single"
-                    selected={endDate}
-                    onSelect={setEndDate}
+              {/* Premium Course Content */}
+              <div>
+                <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                  <Video className="w-5 h-5 text-[#b966e7]" /> Course Content
+                </h3>
+
+                {courseContentsFields.map((chapter, idx) => (
+                  <PremiumChapterForm
+                    key={chapter.id}
+                    control={control}
+                    chapterIndex={idx}
+                    removeChapter={removePremiumChapter}
                   />
-                </PopoverContent>
-              </Popover>
+                ))}
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    appendPremiumChapter({
+                      title: "",
+                      lessons: [{ title: "" }],
+                    })
+                  }
+                  className="flex items-center gap-2 text-[#b966e7] hover:text-[#8d4dc0]"
+                >
+                  <PlusCircle size={18} /> Add Lecture
+                </button>
+              </div>
             </div>
           )}
 
