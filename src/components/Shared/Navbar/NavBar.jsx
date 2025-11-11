@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/tooltip";
 const NavBar = () => {
   const { data: session } = useSession();
-  console.log(session);
+  
   return (
     <div className="bg-[#ffffff] dark:bg-[#273041] py-3 2xl:py-3 shadow-md px-2 ">
       <nav className="container mx-auto flex items-center justify-between">
