@@ -7,8 +7,13 @@ import PreviewAccordion from "./CourseContentPrveviewAccordion/PreviewAccordion"
 import VideoPreview from "./CourseContentPrveviewAccordion/VideoPreview";
 import ButtonIcon from "@/components/Shared/Button/ButtonIcon";
 import Button from "@/components/Shared/Button/Button";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 const SingleCourse = ({ courseId }) => {
+  const {data:session,status}=useSession()
+  const router=useRouter()
   const { data: allCourses = [], isLoading } = useQuery({
     queryKey: ["all-courses"],
     queryFn: async () => {
@@ -17,10 +22,11 @@ const SingleCourse = ({ courseId }) => {
     },
   });
 
-  if (isLoading) return <p>Course data loading...</p>;
+  if (isLoading || status==='loading') return <p>Course data loading...</p>;
   const singleData = allCourses.find((c) => c._id === courseId);
   const {
     courseName,
+    _id,
     type,
     category,
     startDate,
@@ -43,11 +49,55 @@ const SingleCourse = ({ courseId }) => {
     .reverse()
     .join("-");
   console.log(singleData);
+
+  const handleFreeEnroll=async ()=>{
+    const freeEnrollData={
+      studentEmail:session?.user?.email,
+      role:session?.user?.role,
+      courseId:_id,
+      courseName,
+      type,
+      isEnrolled:true
+    }
+    try{
+      const res=await axios.post('/api/admin/free-enroll-student-info',freeEnrollData)
+    console.log('post enroll data',res,res.data.result.insertedId);
+
+    if(res.data?.result.insertedId){
+      await Swal.fire({
+        title: "Enrollment Successful!",
+        text: "You have been successfully enrolled in this course.",
+        icon: "success",
+        confirmButtonText: "OK",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+       Swal.fire({
+        title: "Redirecting...",
+        text: "Please wait, we are taking you to your dashboard.",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        timer: 2000, // ৫ সেকেন্ড
+        timerProgressBar: true,
+      });
+      setTimeout(() => {
+        router.push("/free-enrolled-course-dashboard");
+      }, 2000);
+    }
+    }
+    catch (error){
+      console.log(error)
+      alert("you already enrolled this course")
+    }
+  }
   return (
     <div>
       {/* banner */}
       <div
-        className="py-22 xl:py-44 bg-linear-to-tl from-[#8a9df6] via-[#d1cdf9] to-[#be99f1] dark:bg-gradient-to-tl dark:from-[#10013e] dark:via-[#1e3065] dark:to-[#d906f1]
+        className="py-22 xl:py-44 bg-linear-to-tl from-[#8a9df6] via-[#d1cdf9] to-[#be99f1] dark:bg-gradient-to-tl dark:from-[#10013e] dark:via-[#1e3065] dark:to-[#d906f1] 
 "
       >
         <div className="contentss max-w-7xl mx-auto text-center lg:text-left">
@@ -73,7 +123,7 @@ const SingleCourse = ({ courseId }) => {
             </div>
           </div>
           {/* more info */}
-          <div className="flex items-center justify-center gap-5 pt-6">
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-5 pt-6">
             <h2 className=" flex gap-3 items-center text-sm text-gray-700 dark:text-gray-100  font-semibold">
               <UserRoundCog
                 size={40}
@@ -113,16 +163,16 @@ const SingleCourse = ({ courseId }) => {
       </div>
       {/* course items */}
       {/* Accodion start with layout of video play */}
-      <div className="container mx-auto flex items-center mt-12">
-        <div className="pb-14 flex-3">
+      <div className="container mx-auto flex flex-col lg:flex-row gap-5 xl:gap-0 items-center mt-12 ">
+        <div className="pb-14 lg:flex-3 mx-3 xl:mx-0">
           <PreviewAccordion chaptersData={chapters} />
         </div>
         {/* preview video div conatiner */}
-        <div className="flex-1 p-6 border-2 border-pink-600 rounded-lg">
+        <div className="lg:flex-1 p-3 lg:p-6 border-2 border-pink-600 rounded-lg mx-3 lg:mx-0">
           <VideoPreview singleData={singleData}/>
           {/* other contents */}
           <div className=" py-6 ">
-            {singleData?.type ==='free' && <button className="px-4 py-1 xl:px-9 xl:py-3 text-sm 2xl:px-12 overflow-hidden font-primary font-medium tracking-tighter text-white  group rounded-[5px] 2xl:text-xl cursor-pointer  bg-linear-to-r from-[#394ef4] to-[#b966e7] w-full">Enroll Now</button>}
+            {singleData?.type ==='free' && <button onClick={handleFreeEnroll} className="px-4 py-1 xl:px-9 xl:py-3 text-sm 2xl:px-12 overflow-hidden font-primary font-medium tracking-tighter text-white  group rounded-[5px] 2xl:text-xl cursor-pointer  bg-linear-to-r from-[#394ef4] to-[#b966e7] w-9/12 mx-auto lg:w-full">Enroll Now</button>}
 
             {/* add card */}
 

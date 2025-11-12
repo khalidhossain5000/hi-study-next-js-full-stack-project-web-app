@@ -12,7 +12,7 @@ const PreviewAccordion = ({ chaptersData }) => {
     <Accordion
       type="single"
       collapsible
-      className="w-full max-w-3xl mx-auto py-6"
+      className="w-full max-w-5xl mx-auto py-6"
     >
       {chaptersData.map((chapter, index) => (
         <AccordionItem

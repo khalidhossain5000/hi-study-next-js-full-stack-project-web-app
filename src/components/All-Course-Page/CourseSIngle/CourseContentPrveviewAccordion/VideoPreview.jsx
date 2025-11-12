@@ -16,7 +16,7 @@ const VideoPreview = ({ singleData }) => {
     const previewUrl=singleData?.chapters[0].lessons[0].videoUrl
     console.log(previewUrl,'prev url');
   return (
-    <div className="relative w-96 rounded-lg overflow-hidden">
+    <div className="relative lg:w-96 rounded-lg overflow-hidden">
       {/* Course Image */}
       <img
         src={singleData?.courseImage}
