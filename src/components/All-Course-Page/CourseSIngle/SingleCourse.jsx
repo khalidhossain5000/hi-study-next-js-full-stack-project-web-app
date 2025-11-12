@@ -1,8 +1,12 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Clock8, Hourglass, UserRoundCog } from "lucide-react";
+import { Clock8, Hourglass, Play, UserRoundCog } from "lucide-react";
 import React from "react";
+import PreviewAccordion from "./CourseContentPrveviewAccordion/PreviewAccordion";
+import VideoPreview from "./CourseContentPrveviewAccordion/VideoPreview";
+import ButtonIcon from "@/components/Shared/Button/ButtonIcon";
+import Button from "@/components/Shared/Button/Button";
 
 const SingleCourse = ({ courseId }) => {
   const { data: allCourses = [], isLoading } = useQuery({
@@ -15,8 +19,16 @@ const SingleCourse = ({ courseId }) => {
 
   if (isLoading) return <p>Course data loading...</p>;
   const singleData = allCourses.find((c) => c._id === courseId);
-  const { courseName, type, category, startDate, publishedAt, instructorName } =
-    singleData;
+  const {
+    courseName,
+    type,
+    category,
+    startDate,
+    publishedAt,
+    instructorName,
+    chapters,
+    courseImage,
+  } = singleData;
   const formattedDate = new Date(publishedAt)
     .toISOString()
     .slice(0, 10)
@@ -30,7 +42,7 @@ const SingleCourse = ({ courseId }) => {
     .split("-")
     .reverse()
     .join("-");
-
+  console.log(singleData);
   return (
     <div>
       {/* banner */}
@@ -101,6 +113,31 @@ const SingleCourse = ({ courseId }) => {
       </div>
       {/* course items */}
       {/* Accodion start with layout of video play */}
+      <div className="container mx-auto flex items-center mt-12">
+        <div className="pb-14 flex-3">
+          <PreviewAccordion chaptersData={chapters} />
+        </div>
+        {/* preview video div conatiner */}
+        <div className="flex-1 p-6 border-2 border-pink-600 rounded-lg">
+          <VideoPreview singleData={singleData}/>
+          {/* other contents */}
+          <div className=" py-6 ">
+            {singleData?.type ==='free' && <button className="px-4 py-1 xl:px-9 xl:py-3 text-sm 2xl:px-12 overflow-hidden font-primary font-medium tracking-tighter text-white  group rounded-[5px] 2xl:text-xl cursor-pointer  bg-linear-to-r from-[#394ef4] to-[#b966e7] w-full">Enroll Now</button>}
+
+            {/* add card */}
+
+            <div>
+              {/* prices */}
+              {
+                singleData?.type==='premium' && <h2 className="text-gray-900 font-bold pb-5 text-xl">${singleData?.price}</h2>
+              }
+              {
+              singleData?.type==='premium' && <button className="px-4 py-1 xl:px-9 xl:py-3 text-sm 2xl:px-12 overflow-hidden font-primary font-medium tracking-tighter text-white  group rounded-[5px] 2xl:text-xl cursor-pointer  bg-linear-to-r from-[#394ef4] to-[#b966e7] w-full">Add To Cart</button>
+            }
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
