@@ -12,8 +12,8 @@ import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
 const SingleCourse = ({ courseId }) => {
-  const {data:session,status}=useSession()
-  const router=useRouter()
+  const { data: session, status } = useSession();
+  const router = useRouter();
   const { data: allCourses = [], isLoading } = useQuery({
     queryKey: ["all-courses"],
     queryFn: async () => {
@@ -22,7 +22,7 @@ const SingleCourse = ({ courseId }) => {
     },
   });
 
-  if (isLoading || status==='loading') return <p>Course data loading...</p>;
+  if (isLoading || status === "loading") return <p>Course data loading...</p>;
   const singleData = allCourses.find((c) => c._id === courseId);
   const {
     courseName,
@@ -50,49 +50,57 @@ const SingleCourse = ({ courseId }) => {
     .join("-");
   console.log(singleData);
 
-  const handleFreeEnroll=async ()=>{
-    const freeEnrollData={
-      studentEmail:session?.user?.email,
-      role:session?.user?.role,
-      courseId:_id,
+  const handleFreeEnroll = async () => {
+    const freeEnrollData = {
+      studentEmail: session?.user?.email,
+      role: session?.user?.role,
+      courseId: _id,
       courseName,
       type,
-      isEnrolled:true
-    }
-    try{
-      const res=await axios.post('/api/admin/free-enroll-student-info',freeEnrollData)
-    console.log('post enroll data',res,res.data.result.insertedId);
+      isEnrolled: true,
+    };
+    try {
+      const res = await axios.post(
+        "/api/admin/free-enroll-student-info",
+        freeEnrollData
+      );
+      console.log("post enroll data", res, res.data.result.insertedId);
 
-    if(res.data?.result.insertedId){
-      await Swal.fire({
-        title: "Enrollment Successful!",
-        text: "You have been successfully enrolled in this course.",
-        icon: "success",
+      if (res.data?.result.insertedId) {
+        await Swal.fire({
+          title: "Enrollment Successful!",
+          text: "You have been successfully enrolled in this course.",
+          icon: "success",
+          confirmButtonText: "OK",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        Swal.fire({
+          title: "Redirecting...",
+          text: "Please wait, we are taking you to your dashboard.",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+          timer: 2000, // ৫ সেকেন্ড
+          timerProgressBar: true,
+        });
+        setTimeout(() => {
+          router.push("/free-enrolled-course-dashboard");
+        }, 2000);
+      }
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Already Enrolled!",
+        text: "You have already enrolled in this course.",
+        confirmButtonColor: "#d33",
         confirmButtonText: "OK",
-        timer: 2000,
-        showConfirmButton: false,
       });
-       Swal.fire({
-        title: "Redirecting...",
-        text: "Please wait, we are taking you to your dashboard.",
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        didOpen: () => {
-          Swal.showLoading();
-        },
-        timer: 2000, // ৫ সেকেন্ড
-        timerProgressBar: true,
-      });
-      setTimeout(() => {
-        router.push("/free-enrolled-course-dashboard");
-      }, 2000);
     }
-    }
-    catch (error){
-      console.log(error)
-      alert("you already enrolled this course")
-    }
-  }
+  };
   return (
     <div>
       {/* banner */}
@@ -169,21 +177,32 @@ const SingleCourse = ({ courseId }) => {
         </div>
         {/* preview video div conatiner */}
         <div className="lg:flex-1 p-3 lg:p-6 border-2 border-pink-600 rounded-lg mx-3 lg:mx-0">
-          <VideoPreview singleData={singleData}/>
+          <VideoPreview singleData={singleData} />
           {/* other contents */}
           <div className=" py-6 ">
-            {singleData?.type ==='free' && <button onClick={handleFreeEnroll} className="px-4 py-1 xl:px-9 xl:py-3 text-sm 2xl:px-12 overflow-hidden font-primary font-medium tracking-tighter text-white  group rounded-[5px] 2xl:text-xl cursor-pointer  bg-linear-to-r from-[#394ef4] to-[#b966e7] w-9/12 mx-auto lg:w-full">Enroll Now</button>}
+            {singleData?.type === "free" && (
+              <button
+                onClick={handleFreeEnroll}
+                className="px-4 py-1 xl:px-9 xl:py-3 text-sm 2xl:px-12 overflow-hidden font-primary font-medium tracking-tighter text-white  group rounded-[5px] 2xl:text-xl cursor-pointer  bg-linear-to-r from-[#394ef4] to-[#b966e7] w-9/12 mx-auto lg:w-full"
+              >
+                Enroll Now
+              </button>
+            )}
 
             {/* add card */}
 
             <div>
               {/* prices */}
-              {
-                singleData?.type==='premium' && <h2 className="text-gray-900 font-bold pb-5 text-xl">${singleData?.price}</h2>
-              }
-              {
-              singleData?.type==='premium' && <button className="px-4 py-1 xl:px-9 xl:py-3 text-sm 2xl:px-12 overflow-hidden font-primary font-medium tracking-tighter text-white  group rounded-[5px] 2xl:text-xl cursor-pointer  bg-linear-to-r from-[#394ef4] to-[#b966e7] w-full">Add To Cart</button>
-            }
+              {singleData?.type === "premium" && (
+                <h2 className="text-gray-900 font-bold pb-5 text-xl">
+                  ${singleData?.price}
+                </h2>
+              )}
+              {singleData?.type === "premium" && (
+                <button className="px-4 py-1 xl:px-9 xl:py-3 text-sm 2xl:px-12 overflow-hidden font-primary font-medium tracking-tighter text-white  group rounded-[5px] 2xl:text-xl cursor-pointer  bg-linear-to-r from-[#394ef4] to-[#b966e7] w-full">
+                  Add To Cart
+                </button>
+              )}
             </div>
           </div>
         </div>
