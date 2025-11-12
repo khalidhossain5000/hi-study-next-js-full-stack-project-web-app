@@ -21,14 +21,15 @@ const EnrolledLayout = ({ courseId }) => {
   });
 
   const [selectedVideo, setSelectedVideo] = useState("");
-
+const [selectedLessonTitle, setSelectedLessonTitle] = useState("");
   if (isLoading) return <p>Course data loading...</p>;
 
   const singleEnrollDataInfo = allCourses.find((c) => c._id === courseId);
   if (!singleEnrollDataInfo) return <p>Course not found!</p>;
 
   const chapters = singleEnrollDataInfo.chapters;
-console.log(selectedVideo);
+
+  console.log(selectedLessonTitle);
   return (
     <div className="flex gap-6 p-6">
       {/* Left Side Accordion */}
@@ -42,10 +43,13 @@ console.log(selectedVideo);
                 {chapter.lessons.map((lesson, lidx) => (
                   <button
                     key={lidx}
-                    className={`text-left px-3 py-2 rounded hover:bg-gray-100 ${
-                      selectedVideo === lesson.videoUrl ? "bg-gray-200 font-semibold" : ""
+                    className={`text-left px-3 py-2 rounded hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 ${
+                      selectedVideo === lesson.videoUrl ? "bg-gray-200 dark:bg-gray-900 font-semibold" : ""
                     }`}
-                    onClick={() => setSelectedVideo(lesson.videoUrl)}
+                    onClick={() => {
+                        setSelectedVideo(lesson.videoUrl);
+                        setSelectedLessonTitle(lesson?.title)
+                    }}
                   >
                     {lesson.title || `Lesson ${lidx + 1}`}
                   </button>
@@ -58,6 +62,14 @@ console.log(selectedVideo);
 
       {/* Right Side Video Player */}
       <div className="w-[75%] flex flex-col items-center justify-start">
+        
+          <div>
+            {
+                selectedLessonTitle? <h2 className="text-xl lg:text-2xl text-center text-gray-900 font-bold dark:text-gray-100 pb-6">Title : {selectedLessonTitle}</h2> : 'Select A Lesson To Get Started'
+            }
+          </div>
+
+
         {selectedVideo ? (
           <ReactPlayer
             src={selectedVideo}
