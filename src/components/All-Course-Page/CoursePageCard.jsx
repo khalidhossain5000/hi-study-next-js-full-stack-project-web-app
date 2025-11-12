@@ -1,93 +1,137 @@
-import React from 'react';
+import { ArrowRight, BookCheck, MoveRight, UserRoundPen } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 const CoursePageCard = ({ course }) => {
-    // Destructure required properties from the course object
-    const { 
-        courseImage, 
-        type, 
-        category, 
-        courseName, 
-        instructorName, 
-        price,
-        chapters, // Used to calculate the total number of lessons
-        maxStudents, // Used for 'students enrolled'
-    } = course;
+  // Destructure required properties from the course object
+  const {
+    courseImage,
+    type,
+    category,
+    courseName,
+    instructorName,
+    instructorImage,
+    price,
+    chapters,
+    maxStudents,
+    description,
+  } = course;
 
-    // Calculate total lessons
-    const totalLessons = chapters?.reduce((total, chapter) => 
-        total + (chapter.lessons?.length || 0), 0) || 0;
+  // Calculate total lessons
+  const totalLessons =
+    chapters?.reduce(
+      (total, chapter) => total + (chapter.lessons?.length || 0),
+      0
+    ) || 0;
+  console.log(totalLessons);
+  
+  
+ 
+ 
+  return (
+    <div className="bg-white dark:bg-[#273041] p-5 md:p-[30px] hover:scale-105 transition duration-500 shadow-xl dark:shadow-lg shadow-gray-400 dark:shadow-gray-900 rounded-lg -translate-y-44">
+      {/* thumbnail image */}
+      <div>
+        <Image
+          src={courseImage}
+          alt="Course thumbnail image here"
+          width={500}
+          height={300}
+          className="rounded-lg xl:h-[250px]"
+        />
+      </div>
 
-    // Format the price
-    const formattedPrice = `$${parseFloat(price).toFixed(2)}`;
-
-    return (
-        // The main card container: white background, rounded corners, shadow, and hover effect for interactivity
-        <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden group">
-            
-            {/* 1. Course Image and Badges */}
-            <div className="relative h-48 overflow-hidden">
-                <img 
-                    src={courseImage} 
-                    alt={courseName} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute top-3 left-3 flex space-x-2">
-                    {/* Course Type Badge (e.g., Premium, Free) */}
-                    <span className={`px-3 py-1 text-xs font-semibold uppercase rounded-full 
-                        ${type === 'premium' ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}`}>
-                        {type}
-                    </span>
-                    {/* Category Badge */}
-                    <span className="px-3 py-1 text-xs font-semibold uppercase rounded-full bg-blue-500 text-white">
-                        {category}
-                    </span>
-                </div>
-            </div>
-
-            {/* 2. Card Content */}
-            <div className="p-5">
-                
-                {/* Course Name/Title */}
-                <h3 className="text-xl font-bold text-gray-800 mb-2 leading-tight transition duration-300 hover:text-blue-600">
-                    {courseName}
-                </h3>
-                
-                {/* Instructor Name */}
-                <p className="text-sm text-gray-500 mb-4">
-                    By: <span className="font-medium text-gray-700">{instructorName}</span>
-                </p>
-
-                {/* --- */}
-                
-                {/* 3. Course Meta Data (Lessons, Students) */}
-                <div className="flex justify-between items-center text-gray-600 border-t border-b py-3 mb-4">
-                    <div className="flex items-center space-x-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253" />
-                        </svg>
-                        <span className="text-sm">{totalLessons} Lessons</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20v-2c0-.656-.126-1.283-.356-1.857M17 20H7m12-9a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        <span className="text-sm">{maxStudents} Students</span>
-                    </div>
-                </div>
-
-                {/* 4. Price and Action Button */}
-                <div className="flex justify-between items-center">
-                    <div className="text-2xl font-extrabold text-green-600">
-                        {formattedPrice}
-                    </div>
-                    <button className="px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 transition duration-300">
-                        Read More
-                    </button>
-                </div>
-            </div>
-            
+      {/* card body */}
+      <div className="py-3 space-y-3">
+        <div className="tag flex items-center justify-between py-3 lg:py-5">
+          <h3 className="inline-block px-3 py-1 text-sm font-semibold text-white uppercase tracking-wider bg-indigo-600 rounded-full shadow-md">
+            {category}
+          </h3>
+          <h5
+            className={`px-2 xl:px-3 py-1 text-sm font-medium ${
+              type === "free"
+                ? "bg-linear-t-l from-rose-500 to bg-pink-400 rounded-full dark:text-black"
+                : "dark:text-black rounded-full bg-gradient-to-r from-amber-300 to-yellow-500 rounded-lg"
+            }`}
+          >
+            {type}
+          </h5>
         </div>
-    );
+        <div>
+          <h2 className=" text-xl xl:text-[26px] lg:font-black font-bold text-[#273041] dark:text-gray-100 font-poppins">
+            {courseName.slice(0, 35)}.....
+          </h2>
+        </div>
+        {/* lesson and start date max student */}
+        <div className="flex items-center gap-4 ">
+          {/* lesson and contents */}
+          <div className="flex items-center gap-1 text-[#6b7385] dark:text-gray-100 text-sm font-semibold font-poppins">
+            <BookCheck /> {totalLessons} Lessons
+          </div>
+          {/* max student for premium courses */}
+          {type === "premium" && (
+            <div className=" dark:text-gray-100 flex items-center gap-1 text-[#6b7385] text-sm font-semibold font-poppins">
+              <UserRoundPen /> Max Students: {maxStudents}
+            </div>
+          )}
+        </div>
+        <div>
+          {/* descripitons */}
+          <p
+            className="py-3 xl:text-lg text-[#6b7385] dark:text-gray-100 xl:font-semibold
+"
+          >
+            {description.slice(0, 60)}.....
+          </p>
+        </div>
+        {/* instructor image */}
+        <div className="flex items-center gap-2">
+          <Image
+            src={course?.instructorImage}
+            alt="Instructor Image"
+            width={50}
+            height={50}
+            className="rounded-full"
+          />
+          <h2 className="flex items-center gap-1 text-[#6b7385]  text-sm font-semibold font-poppins">
+            by <span className="font-bold text-gray-900 dark:text-yellow-500">{instructorName}</span>
+          </h2>
+        </div>
+        {/* price and enorll / see more button */}
+        <div className="flex items-center gap-5">
+          <h5 className="text-[#6b7385] dark:text-amber-400 font-black text-xl">
+            $ {type === "premium" ? price : "0"}
+          </h5>
+<Link href={`/all-courses/${course._id}`}>
+          <h2 className="relative text-sm font-semibold text-[#192335] dark:text-white group cursor-pointer flex items-center gap-2">
+            {" "}
+            See More <ArrowRight size={20} />
+            <span className="flex items-center absolute left-0 bottom-0 h-[3px] bg-[#b966e7] w-full scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-in-out"></span>{" "}
+          </h2>
+
+</Link>
+
+          <Link href={"/"}>
+            <button
+              className="relative inline-flex items-center justify-center 
+                     px-7 py-2 whitespace-nowrap tracking-wide
+                     rounded-full overflow-hidden
+                     bg-gradient-to-r from-[#0ea5e9] via-[#6366f1] to-[#8b5cf6]
+                     text-white shadow-[0_0_25px_rgba(139,92,246,0.4)]
+                     transition-all duration-500 ease-in-out
+                     hover:scale-105 hover:shadow-[0_0_35px_rgba(139,92,246,0.7)]
+                     before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent
+                     before:translate-x-[-200%] hover:before:translate-x-[200%]
+                     before:transition-transform before:duration-700"
+            >
+              Enroll Now
+            </button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default CoursePageCard;

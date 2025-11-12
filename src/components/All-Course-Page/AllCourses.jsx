@@ -16,9 +16,10 @@ const AllCourses = () => {
   if (isLoading) return <p>Course data loading...</p>;
   return (
     <div>
-      <div className="pt-[60px] pb-[235px] bg-linear-to-tl from-[#8a9df6] via-[#d1cdf9] to-[#be99f1]">
-        <div className="contentss max-w-7xl mx-auto ">
-          <div className="texts flex items-center gap-6">
+      <div className="pt-[60px] pb-[235px] bg-linear-to-tl from-[#8a9df6] via-[#d1cdf9] to-[#be99f1] dark:bg-gradient-to-tl dark:from-[#4b3c7a] dark:via-[#5c4d8b] dark:to-[#7a5fb0]
+">
+        <div className="contentss max-w-7xl mx-auto text-center lg:text-left">
+          <div className="texts flex items-center gap-6 px-2 xl:px-0">
             <h2 className="text-2xl lg:text-3xl xl:text-[44px] text-[#192335] lg:text-left text-center font-semibold font-gabriela dark:text-gray-100">
               All Courses
             </h2>
