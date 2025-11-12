@@ -10,7 +10,7 @@ const CourseSinglePage = ({params}) => {
    
     return (
         <div>
-            <h2>Hello single pag is here</h2>
+            
 
             <SingleCourse courseId={id}/>
         </div>
