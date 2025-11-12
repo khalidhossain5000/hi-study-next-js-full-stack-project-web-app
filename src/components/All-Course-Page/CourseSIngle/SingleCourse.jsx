@@ -64,7 +64,7 @@ const SingleCourse = ({ courseId }) => {
         "/api/admin/free-enroll-student-info",
         freeEnrollData
       );
-      console.log("post enroll data", res, res.data.result.insertedId);
+    
 
       if (res.data?.result.insertedId) {
         await Swal.fire({
@@ -87,7 +87,7 @@ const SingleCourse = ({ courseId }) => {
           timerProgressBar: true,
         });
         setTimeout(() => {
-          router.push("/free-enrolled-course-dashboard");
+          router.push(`/free-enrolled-course-dashboard/${courseId}`);
         }, 2000);
       }
     } catch (error) {

@@ -24,7 +24,7 @@ const CoursePageCard = ({ course }) => {
       (total, chapter) => total + (chapter.lessons?.length || 0),
       0
     ) || 0;
-  console.log(totalLessons);
+
   
   
  
@@ -130,6 +130,7 @@ const CoursePageCard = ({ course }) => {
           </Link>
         </div>
       </div>
+      
     </div>
   );
 };
