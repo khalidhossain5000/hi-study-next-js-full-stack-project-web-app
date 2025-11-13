@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm, useFieldArray, Controller } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -113,6 +113,22 @@ const UpdateForm = ({ courseId }) => {
 
   if (!singleCourse) return <p className="text-center text-gray-500">Loading...</p>;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-5 px-1 md:px-2 lg:px-4">
       <motion.div
