@@ -4,6 +4,10 @@ body {
   font-family: var(--font-poppins);
 }
 @custom-variant dark (&:is(.dark *));
+@theme {
+  --breakpoint-lxl: 1300px;
+  --breakpoint-3xl: 1800px;
+}
 
 @theme inline {
   --color-background: var(--background);

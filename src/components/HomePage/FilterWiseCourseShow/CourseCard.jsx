@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import ButtonIcon from "@/components/Shared/Button/ButtonIcon";
+import Link from "next/link";
 
 const CourseCard = ({ course }) => {
   return (
@@ -28,7 +29,7 @@ const CourseCard = ({ course }) => {
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="pb-6"
           >
-            <ButtonIcon className="">View Details</ButtonIcon>
+           <Link href={`/all-courses/${course?._id}`}> <ButtonIcon  className="">View Details</ButtonIcon></Link>
           </motion.div>
         </div>
       </div>

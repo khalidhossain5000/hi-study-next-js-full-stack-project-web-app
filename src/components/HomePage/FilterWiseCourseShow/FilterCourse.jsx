@@ -59,14 +59,14 @@ const FilterCourse = () => {
 
       {/* Courses Grid */}
       <div className="py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
-        {filteredCourses.map((course) => (
+        {filteredCourses?.map((course) => (
           <CourseCard key={course._id} course={course} />
         ))}
       </div>
 
       {/* View All Button */}
       <div className="mt-8 lg:mt-12  flex justify-center">
-        <Link href={'/all-courses'}>
+        <Link href={`/all-courses`}>
         <ButtonIcon>
          
           
