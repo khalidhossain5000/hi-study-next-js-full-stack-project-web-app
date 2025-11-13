@@ -1,10 +1,14 @@
 'use client';
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
 const PaymentForm = () => {
+    const {id}=useParams()
+    
   const [method, setMethod] = useState("");
   const [transactionId, setTransactionId] = useState("");
-
   const paymentGuides = {
     bkash: {
       number: "01912-345678",
@@ -24,14 +28,35 @@ const PaymentForm = () => {
     },
   };
 
+
+//   getting current enrolling course data
+  const { data: allCourses = [], isLoading } = useQuery({
+    queryKey: ["all-courses"],
+    queryFn: async () => {
+      const res = await axios.get("/api/public/all-courses");
+      return res.data.allCourses;
+    },
+  });
+
+  if (isLoading || status === "loading") return <p>Course data loading...</p>;
+
+  const enrollingData = allCourses.find((c) => c._id === id);
+
+  if (!enrollingData) return <p>Course not found!</p>;
+  console.log(enrollingData);
+
+//   sending enrolling premium course info to the db
+const handlePremiumEnroll=()=>{
+
+}
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-      {/* 🌈 Beautiful Gradient Banner */}
+      {/*  Beautiful Gradient Banner */}
       <div className="relative overflow-hidden py-24 text-center bg-gradient-to-r from-[#6a11cb] via-[#2575fc] to-[#6a11cb] dark:from-[#4f46e5] dark:via-[#9333ea] dark:to-[#4338ca] shadow-lg">
         <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/10 opacity-30"></div>
         <div className="relative z-10">
           <h1 className="text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-4 drop-shadow-lg">
-            Make Your Payment 💳
+            Make Your Payment 
           </h1>
           <p className="text-lg md:text-xl text-white/90 font-medium max-w-2xl mx-auto">
             Secure • Fast • Reliable — Complete your transaction instantly
@@ -42,7 +67,7 @@ const PaymentForm = () => {
         </div>
       </div>
 
-      {/* 💰 Payment Form */}
+      {/*  Payment Form */}
       <div className="max-w-md mx-auto bg-white dark:bg-gray-800 shadow-2xl rounded-2xl p-8 mt-10 mb-20">
         <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800 dark:text-white">
           Payment Information
@@ -54,6 +79,7 @@ const PaymentForm = () => {
             htmlFor="payment-method"
             className="block mb-2 font-medium text-gray-700 dark:text-gray-300"
           >
+            Pay to enroll in {enrollingData.courseName}
             Select Payment Method
           </label>
           <select
@@ -113,9 +139,10 @@ const PaymentForm = () => {
 
         {/* Submit Button */}
         <button
+        onSubmit={handlePremiumEnroll}
           className="w-full py-3 text-lg font-semibold rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white transition-all shadow-md"
         >
-          Confirm Payment
+          Pay ${enrollingData?.price}
         </button>
       </div>
     </div>

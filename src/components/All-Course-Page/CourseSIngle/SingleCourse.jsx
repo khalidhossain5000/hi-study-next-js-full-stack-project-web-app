@@ -173,7 +173,7 @@ const SingleCourse = ({ courseId }) => {
             {type === "premium" && (
               <>
                 <h2 className="text-gray-900 font-bold pb-5 text-xl">${price}</h2>
-                <Link href={'/payment'}>
+                <Link href={`/payment/${_id}`}>
                 <button className="px-4 py-1 xl:px-9 xl:py-3 text-sm 2xl:px-12 overflow-hidden font-primary font-medium tracking-tighter text-white group rounded-[5px] 2xl:text-xl cursor-pointer bg-linear-to-r from-[#394ef4] to-[#b966e7] w-full">
                   Buy Now
                 </button>
