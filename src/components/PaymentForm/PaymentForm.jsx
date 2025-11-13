@@ -1,35 +1,40 @@
-'use client';
+"use client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 const PaymentForm = () => {
-    const {id}=useParams()
-    
+  const { id } = useParams();
+  const { data: session, status } = useSession();
   const [method, setMethod] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const paymentGuides = {
     bkash: {
       number: "01912-345678",
-      guide: "Open your bKash app → Tap ‘Send Money’ → Enter this number → Send the amount → Copy your Transaction ID.",
+      guide:
+        "Open your bKash app → Tap ‘Send Money’ → Enter this number → Send the amount → Copy your Transaction ID.",
     },
     rocket: {
       number: "01722-334455",
-      guide: "Go to Rocket app → Tap ‘Send Money’ → Enter the number → Send the amount → Save the Transaction ID.",
+      guide:
+        "Go to Rocket app → Tap ‘Send Money’ → Enter the number → Send the amount → Save the Transaction ID.",
     },
     nagad: {
       number: "01888-556677",
-      guide: "Open Nagad app → Tap ‘Send Money’ → Enter this number → Send the amount → Note down your Transaction ID.",
+      guide:
+        "Open Nagad app → Tap ‘Send Money’ → Enter this number → Send the amount → Note down your Transaction ID.",
     },
     upay: {
       number: "01666-778899",
-      guide: "Go to Upay app → Choose ‘Send Money’ → Enter the number → Send payment → Copy Transaction ID.",
+      guide:
+        "Go to Upay app → Choose ‘Send Money’ → Enter the number → Send payment → Copy Transaction ID.",
     },
   };
 
-
-//   getting current enrolling course data
+  //   getting current enrolling course data
   const { data: allCourses = [], isLoading } = useQuery({
     queryKey: ["all-courses"],
     queryFn: async () => {
@@ -45,10 +50,45 @@ const PaymentForm = () => {
   if (!enrollingData) return <p>Course not found!</p>;
   console.log(enrollingData);
 
-//   sending enrolling premium course info to the db
-const handlePremiumEnroll=()=>{
-
-}
+  //   sending enrolling premium course info to the db
+  const handlePremiumEnroll = async () => {
+    const enrollInfo = {
+      studentEmail: session?.user?.email,
+      paymentMethod: method,
+      transactionId,
+      courseId: enrollingData?._id,
+      category: enrollingData?.category,
+      courseName: enrollingData?.courseName,
+      paid: enrollingData?.price,
+      enrollStatus: "enrolled",
+      paymentStatus: "completed",
+      enrollDate: new Date().toISOString(),
+    };
+    try {
+      const res = await axios.post("/api/public/premium-enroll", enrollInfo);
+      console.log(res.data.result.insertedId);
+      if (res.data.result.insertedId) {
+        Swal.fire({
+          title: "Enrollment Successful!",
+          html: `
+    <p>Thank you for enrolling in <strong>${enrollingData?.courseName}</strong>.</p>
+    <p>We will reach you soon with further instructions.</p>
+  `,
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Enrollment Failed!",
+        text: "You have already enrolled in this course.",
+        icon: "error",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#d33",
+      });
+    }
+  };
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       {/*  Beautiful Gradient Banner */}
@@ -56,7 +96,7 @@ const handlePremiumEnroll=()=>{
         <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/10 opacity-30"></div>
         <div className="relative z-10">
           <h1 className="text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-4 drop-shadow-lg">
-            Make Your Payment 
+            Make Your Payment
           </h1>
           <p className="text-lg md:text-xl text-white/90 font-medium max-w-2xl mx-auto">
             Secure • Fast • Reliable — Complete your transaction instantly
@@ -139,8 +179,8 @@ const handlePremiumEnroll=()=>{
 
         {/* Submit Button */}
         <button
-        onSubmit={handlePremiumEnroll}
-          className="w-full py-3 text-lg font-semibold rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white transition-all shadow-md"
+          onClick={handlePremiumEnroll}
+          className="w-full py-3 text-lg font-semibold rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white transition-all shadow-md cursor-pointer"
         >
           Pay ${enrollingData?.price}
         </button>

@@ -6,10 +6,27 @@ export async function POST(req) {
     const premiumEnrollInfoCollection = await getCollection(
       "premiumEnrollPaymentInfo"
     );
-    const data = req.json();
+    const data =await req.json();
+
+const{studentEmail,courseId}=data
+
+const alreadyEnrolled=await premiumEnrollInfoCollection.findOne({
+    studentEmail,
+    courseId
+})
+
+if(alreadyEnrolled){
+    return NextResponse.json(
+        { message: "You have already enrolled in this course!" },
+        { status: 400 } // bad request
+      );
+}
+
+
+
     const result = await premiumEnrollInfoCollection.insertOne(data);
 
-    return NextResponse({
+    return NextResponse.json({
       result,
       message: "Premium info successfuly completed",
     });
