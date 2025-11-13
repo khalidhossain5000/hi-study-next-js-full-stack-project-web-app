@@ -1,4 +1,6 @@
 import { getCollection } from "@/lib/collections";
+import { ObjectId } from "mongodb";
+import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
@@ -37,5 +39,58 @@ export async function POST(req) {
       JSON.stringify({ success: false, error: "Failed to add course" }),
       { status: 500 }
     );
+  }
+}
+
+
+
+//delete user api starts here
+
+
+export async function DELETE(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const courseId = searchParams.get("id");
+
+    if (!courseId) {
+      return NextResponse.json(
+        { success: false, message: "Missing courseId" },
+        { status: 400 }
+      );
+    }
+
+    // প্রথমে freeCourses collection থেকে খুঁজুন
+    const freeCollection = await getCollection("freeCourses");
+    const premiumCollection = await getCollection("premiumCourses");
+
+    let course = await freeCollection.findOne({ _id: new ObjectId(courseId) });
+    let collectionToUse;
+
+    if (course) {
+      collectionToUse = freeCollection;
+    } else {
+      // freeCourses এ না থাকলে premiumCourses এ খুঁজুন
+      course = await premiumCollection.findOne({ _id: new ObjectId(courseId) });
+      collectionToUse = premiumCollection;
+    }
+
+    if (!course) {
+      return NextResponse.json(
+        { success: false, message: "Course not found" },
+        { status: 404 }
+      );
+    }
+
+    // কোর্স delete করুন
+    const result = await collectionToUse.deleteOne({ _id: new ObjectId(courseId) });
+
+    return NextResponse.json({
+      success: true,
+      message: "Course deleted successfully",
+      result,
+    });
+  } catch (error) {
+    console.error("Error deleting course:", error);
+    return NextResponse.json({ success: false, error: "Server error" }, { status: 500 });
   }
 }

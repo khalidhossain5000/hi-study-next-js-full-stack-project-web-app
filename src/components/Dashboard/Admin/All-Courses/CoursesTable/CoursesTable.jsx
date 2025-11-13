@@ -14,9 +14,10 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import Swal from "sweetalert2";
 
 const CoursesTable = () => {
-  const { data: allCourses = [], isLoading } = useQuery({
+  const { data: allCourses = [], isLoading ,refetch} = useQuery({
     queryKey: ["all-courses"],
     queryFn: async () => {
       const res = await axios.get("/api/public/all-courses");
@@ -27,6 +28,37 @@ const CoursesTable = () => {
   if (isLoading) return <p>Course data loading...</p>;
  
 
+   // delete api
+
+  const handleDeletecourse = async (userId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to delete this Course permanently!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axios.delete(`/api/admin/add-course?id=${userId}`);
+
+          if (res.data.success) {
+            Swal.fire(
+              "Deleted!",
+              "User has been deleted successfully.",
+              "success"
+            );
+            refetch();
+          }
+        } catch (error) {
+          console.error("Error deleting user:", error);
+          Swal.fire("Error!", "Failed to delete user.", "error");
+        }
+      }
+    });
+  };
   return (
     <div>
       {allCourses.length === 0 && <DefaultMessage />}
