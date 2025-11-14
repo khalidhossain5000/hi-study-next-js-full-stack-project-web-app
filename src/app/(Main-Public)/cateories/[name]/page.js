@@ -1,3 +1,4 @@
+import CategorySingle from '@/components/CategorySinglePageCard/CategorySinglePage/CategorySingle';
 import React, { use } from 'react';
 
 const SingleCategories = ({params}) => {
@@ -5,7 +6,8 @@ const SingleCategories = ({params}) => {
 
     return (
         <div>
-            <h2>welcome to cateory {name}</h2>
+      
+            <CategorySingle categoryName={name}/>
         </div>
     );
 };

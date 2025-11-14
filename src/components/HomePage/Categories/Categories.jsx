@@ -58,15 +58,15 @@ const AllCategories = () => {
         Explore Top Courses Caterories <br />
         That Change Yourself
       </h2>
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-12">
+      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-12 px-3 xl:px-0">
         {CATEGORY.map((cat, i) => (
           <Link href={`/cateories/${cat.name}`} key={i}>
           <div
             key={i}
-            className="bg-white dark:bg-[#273041] shadow-2xl dark:shadow-xl rounded-xl p-6 xl:p-[50px] hover:scale-105 hover:cursor-pointer transition duration-500"
+            className="bg-white dark:bg-[#273041] shadow-2xl dark:shadow-xl rounded-xl p-3 lg:p-6 xl:p-[50px] hover:scale-105 hover:cursor-pointer transition duration-500 h-full"
           >
             <div className="flex justify-center">
-              <img src={cat.image.src} className="w-24 mb-6" alt="" />
+              <img src={cat.image.src} className="w-12 lg:w-24 mb-6" alt="" />
             </div>
             <h2 className="text-[#192335] dark:text-gray-100 text-sm lg:text-xl font-semibold lg:font-bold text-center my-4">
               {cat.name}
