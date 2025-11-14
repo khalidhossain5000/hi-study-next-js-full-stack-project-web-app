@@ -40,6 +40,11 @@ const Sidebar = () => {
         path: "/dashboard/admin/free-enrolled",
         icon: <MdOutlineDonutSmall  className="w-5 h-5" />,
       },
+      {
+        name: "Premium Enrolled Course",
+        path: "/dashboard/admin/premium-enroll-info",
+        icon: <MdOutlineDonutSmall  className="w-5 h-5" />,
+      },
     ];
   }
   // user route starts here
