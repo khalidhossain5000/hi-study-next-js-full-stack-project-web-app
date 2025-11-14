@@ -28,3 +28,10 @@ if (isAlreadyEnrolled) {
     return NextResponse.json({ message: "Bike Adds Error" }, error);
   }
 }
+
+
+export async function GET(){
+const freeEnrolled=await getCollection("free-enrolled-student-info")
+const result=await freeEnrolled.find().toArray()
+return NextResponse.json({ message: "enrolled info get Successfully", result });
+}

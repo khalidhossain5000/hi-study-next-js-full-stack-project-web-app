@@ -34,6 +34,11 @@ const Sidebar = () => {
         name: "All Course",
         path: "/dashboard/admin/all-courses",
         icon: <MdOutlineDonutSmall  className="w-5 h-5" />,
+      }, 
+      {
+        name: "Free Enrolled Course",
+        path: "/dashboard/admin/free-enrolled",
+        icon: <MdOutlineDonutSmall  className="w-5 h-5" />,
       },
     ];
   }
