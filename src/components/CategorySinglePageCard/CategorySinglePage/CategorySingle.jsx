@@ -2,7 +2,8 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
-import { Calendar, Clock, User, Tag } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
+import Link from "next/link";
 
 const CategoryArchive = ({ categoryName }) => {
   const { data: allCourses = [], isLoading } = useQuery({
@@ -26,7 +27,11 @@ const CategoryArchive = ({ categoryName }) => {
   );
 
   if (!filteredCourses.length)
-    return <p className="text-center text-red-500 py-10">No courses found!</p>;
+    return (
+      <p className="text-center text-red-500 py-10">
+        No courses found! in {categoryName} Category
+      </p>
+    );
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
@@ -39,7 +44,6 @@ const CategoryArchive = ({ categoryName }) => {
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
         {filteredCourses.map((course) => {
           const startDate = new Date(course.startDate).toLocaleDateString();
-          const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${course.instructorName}`;
 
           return (
             <div
@@ -76,7 +80,7 @@ const CategoryArchive = ({ categoryName }) => {
                 {/* Instructor Info */}
                 <div className="flex items-center gap-3 mb-3">
                   <img
-                    src={avatarUrl}
+                    src={course.instructorImage}
                     alt={course.instructorName}
                     className="w-10 h-10 rounded-full border border-purple-400 dark:border-purple-600"
                   />
@@ -109,9 +113,14 @@ const CategoryArchive = ({ categoryName }) => {
                   <p className="text-xl font-bold text-blue-600 dark:text-blue-400">
                     {course.price ? `৳ ${course.price}` : "Free"}
                   </p>
-                  <button className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-xl font-semibold shadow-lg hover:scale-105 transition">
-                    Enroll Now
-                  </button>
+                  <div className="flex gap-2">
+                    <button className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-xl font-semibold shadow-lg hover:scale-105 transition">
+                      Enroll Now
+                    </button>
+                   <Link href={`/all-courses/${course._id}`}> <button className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-xl font-semibold shadow hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                      See More
+                    </button></Link>
+                  </div>
                 </div>
               </div>
             </div>
