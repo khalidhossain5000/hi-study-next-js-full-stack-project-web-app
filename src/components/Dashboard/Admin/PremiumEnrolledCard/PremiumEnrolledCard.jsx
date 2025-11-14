@@ -2,7 +2,8 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
-import { Calendar, Mail, BookOpen, BadgeCheck } from "lucide-react";
+import { Calendar, Mail, BookOpen, BadgeCheck, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const PremiumEnrolledCard = () => {
   const {
@@ -32,7 +33,7 @@ const PremiumEnrolledCard = () => {
           day: "numeric",
         });
 
-        // Generate profile avatar from email
+        // Auto avatar based on email
         const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${item.studentEmail}`;
 
         return (
@@ -49,7 +50,7 @@ const PremiumEnrolledCard = () => {
               group-hover:bg-white/95 dark:group-hover:bg-slate-900 transition-all"
             >
               
-              {/* Category Badge */}
+              {/* Category */}
               <span
                 className="px-3 py-1 text-xs rounded-full font-semibold
                 bg-gray-900 text-white dark:bg-[#1e293b] dark:text-purple-300
@@ -60,17 +61,14 @@ const PremiumEnrolledCard = () => {
 
               {/* Avatar + Email */}
               <div className="flex items-center gap-3 mt-2">
-                {/* Avatar */}
                 <img
                   src={avatarUrl}
                   alt="avatar"
                   className="w-12 h-12 rounded-full shadow-lg border border-purple-400 dark:border-purple-600"
                 />
-                <div>
-                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
-                    <Mail className="w-4 h-4 text-blue-500" />
-                    <span className="font-medium">{item.studentEmail}</span>
-                  </div>
+                <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+                  <Mail className="w-4 h-4 text-blue-500" />
+                  <span className="font-medium">{item.studentEmail}</span>
                 </div>
               </div>
 
@@ -91,7 +89,6 @@ const PremiumEnrolledCard = () => {
                 <span className="font-bold uppercase">{item.paymentMethod}</span>
               </p>
 
-              {/* Txn ID */}
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 Txn ID:{" "}
                 <span className="font-semibold text-purple-600 dark:text-purple-300">
@@ -113,11 +110,36 @@ const PremiumEnrolledCard = () => {
                 </p>
               </div>
 
-              {/* Enroll Date */}
+              {/* Date */}
               <div className="mt-4 flex items-center gap-2 text-gray-600 dark:text-gray-300">
                 <Calendar className="w-4 h-4 text-pink-500" />
                 <span>{date}</span>
               </div>
+
+              {/* ACTION BUTTONS */}
+              <div className="mt-6 flex justify-between items-center gap-3">
+                
+                {/* View Course Button */}
+                <Link
+                  href={`/dashboard/admin/course-details/${item.courseId}`}
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg
+                    bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600
+                    transition-all"
+                >
+                  View Details <ArrowRight className="w-4 h-4" />
+                </Link>
+
+                {/* Contact Student Button */}
+                <a
+                  href={`mailto:${item.studentEmail}`}
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg
+                    bg-purple-600 text-white hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600
+                    transition-all"
+                >
+                  Contact
+                </a>
+              </div>
+
             </div>
           </div>
         );

@@ -21,7 +21,7 @@ const NavBar = () => {
   
   return (
     <div className="bg-[#ffffff] dark:bg-[#273041] py-3 2xl:py-3 shadow-md px-2 ">
-      <nav className="container mx-auto flex items-center justify-between">
+      <nav className="container mx-auto flex items-center justify-between ">
         <div className="logoh">
           <Image
             src={lightLogo}
