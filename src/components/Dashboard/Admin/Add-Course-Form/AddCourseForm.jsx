@@ -26,6 +26,8 @@ const CATEGORY_OPTIONS = [
   "Design",
   "Marketing",
   "AI-&-ML",
+  "Graphic-Design",
+  "Language",
 ];
 
 const CourseForm = () => {

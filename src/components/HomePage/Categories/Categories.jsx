@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+'use client'
 import React from "react";
 import web from "../../../assets/home/categories/web-design.png";
 import design from "../../../assets/home/categories/design.png";
@@ -8,6 +9,7 @@ import it from "../../../assets/home/categories/server.png";
 import data from "../../../assets/home/categories/infographic.png";
 import finance from "../../../assets/home/categories/paint-palette.png";
 import sales from "../../../assets/home/categories/pantone.png";
+import Link from "next/link";
 
 const CATEGORY = [
   {
@@ -23,7 +25,7 @@ const CATEGORY = [
     image: ai,
   },
   {
-    name: "Design",
+    name: "Graphic-Design",
     image: design,
   },
   {
@@ -58,6 +60,7 @@ const AllCategories = () => {
       </h2>
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-12">
         {CATEGORY.map((cat, i) => (
+          <Link href={`/cateories/${cat.name}`} key={i}>
           <div
             key={i}
             className="bg-white dark:bg-[#273041] shadow-2xl dark:shadow-xl rounded-xl p-6 xl:p-[50px] hover:scale-105 hover:cursor-pointer transition duration-500"
@@ -69,7 +72,7 @@ const AllCategories = () => {
               {cat.name}
             </h2>
             <h5 className="text-center font-bold">0 Courses</h5>
-          </div>
+          </div></Link>
         ))}
       </div>
     </div>
