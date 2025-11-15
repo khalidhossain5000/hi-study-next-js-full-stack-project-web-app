@@ -59,3 +59,58 @@ export async function POST(req) {
     );
   }
 }
+export async function PUT(req) {
+  try {
+    const body = await req.json();
+    const { name, profileImage, email } = body;
+console.log(email,body);
+    if (!email) {
+      return new Response(
+        JSON.stringify({ message: "Unauthorized: Email missing" }),
+        { status: 401 }
+      );
+    }
+
+    if (!name && !profileImage) {
+      return new Response(
+        JSON.stringify({ message: "Nothing to update" }),
+        { status: 400 }
+      );
+    }
+
+    const usersCollection = await getCollection("users");
+
+    const updateData = {};
+    if (name) updateData.name = name;
+    if (profileImage) updateData.profileImage = profileImage;
+
+    const result = await usersCollection.updateOne(
+      { email },
+      { $set: updateData }
+    );
+
+    if (result.matchedCount === 0) {
+      return new Response(
+        JSON.stringify({ message: "User not found" }),
+        { status: 404 }
+      );
+    }
+
+    // Fetch updated user
+    const updatedUser = await usersCollection.findOne({ email });
+
+    return new Response(
+      JSON.stringify({
+        message: "Profile updated successfully",
+        user: updatedUser,
+      }),
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Update Profile Error:", error);
+    return new Response(
+      JSON.stringify({ message: "Internal Server Error" }),
+      { status: 500 }
+    );
+  }
+}

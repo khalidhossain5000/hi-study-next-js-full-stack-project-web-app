@@ -12,7 +12,7 @@ const Sidebar = () => {
   const { data: session } = useSession();
   let sidebarRoutes = [];
   // const role = session?.user?.role;
-  const role = "admin";
+  const role = "student";
   if (role === "admin") {
     sidebarRoutes = [
       {
@@ -57,7 +57,12 @@ const Sidebar = () => {
       },
       {
         name: "My Courses",
-        path: "/my-courses",
+        path: "/dashboard/students/my-courses",
+        icon: <BookOpen className="w-5 h-5" />,
+      },
+      {
+        name: "Update Profile",
+        path: "/dashboard/students/update-profile",
         icon: <BookOpen className="w-5 h-5" />,
       },
     ];

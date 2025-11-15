@@ -118,6 +118,7 @@ const ImageUpload = ({ onUpload, imageUrl }) => {
     const formData = new FormData();
     formData.append("image", file);
 
+    console.log(formData,'this is formdata');
     try {
       const res = await axios.post(
         `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_KEY}`,
