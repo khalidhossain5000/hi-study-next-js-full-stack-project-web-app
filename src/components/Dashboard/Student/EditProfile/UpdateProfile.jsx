@@ -36,7 +36,7 @@ const UpdateProfileForm = () => {
       setIsSubmitting(false);
     }
   };
-  console.log(imageUrl, name, "this is name f", session);
+  
   return (
     <div className="max-w-md mx-auto bg-white dark:bg-[#0f172a] p-6 rounded-2xl shadow-lg">
       <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white text-center">
@@ -47,7 +47,7 @@ const UpdateProfileForm = () => {
         {/* Name Input */}
         <div className="flex flex-col">
           <label className="text-gray-700 dark:text-gray-300 font-medium mb-1">
-            Name
+            Nam
           </label>
           <input
             type="text"
