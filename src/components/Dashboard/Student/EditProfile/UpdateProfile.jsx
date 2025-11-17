@@ -47,7 +47,7 @@ const UpdateProfileForm = () => {
         {/* Name Input */}
         <div className="flex flex-col">
           <label className="text-gray-700 dark:text-gray-300 font-medium mb-1">
-            Nam
+            Name
           </label>
           <input
             type="text"
