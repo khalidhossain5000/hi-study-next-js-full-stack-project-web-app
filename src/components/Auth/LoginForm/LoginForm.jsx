@@ -7,11 +7,15 @@ import { AnimatedButton } from "@/components/ui/animated-button";
 import SocialLogin from "@/components/Shared/SocialLogin/SocialLogin";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const LoginForm = () => {
   const router = useRouter();
   const [error, setError] = useState("");
+
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -26,6 +30,9 @@ const LoginForm = () => {
       redirect: false,
     });
 
+    if(result.ok){
+      router.push(callbackUrl);
+    }
    console.log(result,'login result this is sher e');
   };
   return (

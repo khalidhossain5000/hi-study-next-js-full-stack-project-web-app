@@ -16,7 +16,7 @@ const FreeEnrolledCard = () => {
       return res.data.result;
     },
   });
-
+  
   if (isLoading) return (
     <div className="flex justify-center items-center min-h-64">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
@@ -50,7 +50,7 @@ const FreeEnrolledCard = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-6">
-          {freeEnrolled.map((enrollment) => (
+          {freeEnrolled?.map((enrollment) => (
             <div 
               key={enrollment._id}
               className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden transform hover:-translate-y-1"

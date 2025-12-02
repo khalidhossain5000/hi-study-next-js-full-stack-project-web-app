@@ -13,21 +13,31 @@ import { usePathname } from "next/navigation";
 import AnimatedHamburgerButton from "../../AnimatedBurgerIcon/BurgerIcon";
 import { ModeToggle } from "../../ThemeToggle/ThemeToggle";
 import { Button } from "@/components/ui/button";
+import { TrialButton } from "@/components/lightswind/trial-button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const HomeResponsiveMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const routes = [
-    { name: "Home", path: "/" },
-    { name: "All Courses", path: "/allcoursers" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
-    { name: "Dashboard", path: "/dashboard" },
-    { name: "All Instructors", path: "/instructors" },
-    { name: "Premium Courses", path: "/premium-courses" },
-    { name: "My Courses", path: "/my-courses" },
-    { name: "My Wishlist", path: "/wishlists" },
-  ];
+  const { data: session, status } = useSession();
+  const user=session?.user;
+    const routes = [
+      { name: "Home", path: "/" },
+      { name: "All Courses", path: "/all-courses" },
+      { name: "About", path: "/about" },
+      { name: "Contact", path: "/contact" },
+      //   { name: "All Instructors", path: "/instructors"  },
+      //   { name: "Premium Courses", path: "/premium-courses" },
+      
+    //   { name: "My Wishlist", path: "/wishlist" },
+    ];
+    if(user){
+  routes.push({ name: "Dashboard", path: "/dashboard" });
+  routes.push({ name: "My Courses", path: "/dashboard/students/my-courses" });
+}
   const pathName = usePathname();
+   
   return (
     <div className="lg:hidden">
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -66,7 +76,43 @@ const HomeResponsiveMenu = () => {
 
                 <div className="flex items-center justify-between gap-4 mb-4">
                   <ModeToggle />
-                  <Button>Login</Button>
+                  <div className="flex items-center gap-6">
+              {status === "loading" && (
+                <div className="flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+                </div>
+              )}
+              {status === "authenticated" && session?.user && (
+                <div>
+                  {/* user name showing on tooltip image hover */}
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Image
+                        src={session?.user?.profileImage}
+                        alt="user profile image with avatar here"
+                        width={50}
+                        height={50}
+                        className="rounded-full border-2 border-indigo-600 p-1 cursor-pointer"
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent className={`bg-[#d176da] p-2 text-md`}>
+                      <p>{session?.user?.name}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
+              )}
+              <div>
+                {!session?.user ? (
+                  <Link href={`/auth/login`}>
+                    <Button>Login</Button>
+                  </Link>
+                ) : (
+                  <TrialButton onClick={() => signOut({ callbackUrl: "/" })}>
+                    Log Out
+                  </TrialButton>
+                )}
+              </div>
+            </div>
                 </div>
               </div>
             </div>

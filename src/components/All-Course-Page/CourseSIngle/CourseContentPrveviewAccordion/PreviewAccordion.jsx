@@ -12,13 +12,13 @@ const PreviewAccordion = ({ chaptersData }) => {
     <Accordion
       type="single"
       collapsible
-      className="w-full max-w-5xl mx-auto py-6"
+      className="w-full max-w-5xl mx-auto py-6 "
     >
       {chaptersData.map((chapter, index) => (
         <AccordionItem
           key={index}
           value={`item-${index + 1}`}
-          className="border border-gray-700 dark:border-gray-600 rounded-lg mb-3 bg-gray-50 dark:bg-gray-900 shadow-sm"
+          className="border border-gray-500 dark:border-gray-600 rounded-lg mb-3 bg-gray-50 dark:bg-gray-900 shadow-sm "
         >
           {/* Chapter Title */}
           <AccordionTrigger

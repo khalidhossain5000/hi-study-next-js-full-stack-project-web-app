@@ -110,9 +110,7 @@ const SingleCourse = ({ courseId }) => {
   return (
     <div>
       {/* Banner */}
-      <div
-        className="py-22 xl:py-44 bg-linear-to-tl from-[#8a9df6] via-[#d1cdf9] to-[#be99f1] dark:bg-gradient-to-tl dark:from-[#10013e] dark:via-[#1e3065] dark:to-[#d906f1]"
-      >
+      <div className="py-22 xl:py-44 bg-linear-to-tl from-[#8a9df6] via-[#d1cdf9] to-[#be99f1] dark:bg-gradient-to-tl dark:from-[#10013e] dark:via-[#1e3065] dark:to-[#d906f1]">
         <div className="contentss max-w-7xl mx-auto text-center lg:text-left">
           <h5 className="text-center text-[18px] md:text-xl lg:text-3xl xl:text-5xl font-medium xl:font-black font-gabriela bg-linear-to-t from-[#394ef4] to-[#b966e7] dark:from-[#d906f1] dark:via-[#d1cdf9] dark:to-[#394ef4] bg-clip-text text-transparent">
             {courseName}
@@ -125,7 +123,10 @@ const SingleCourse = ({ courseId }) => {
                 size={40}
                 className="bg-[#d3dafd] dark:bg-indigo-900 p-2 rounded-full text-black dark:text-gray-100"
               />
-              By <span className="font-medium text-gray-900 dark:text-gray-100">{instructorName}</span>
+              By{" "}
+              <span className="font-medium text-gray-900 dark:text-gray-100">
+                {instructorName}
+              </span>
             </h2>
 
             <h2 className="flex gap-3 items-center text-sm text-gray-700 dark:text-gray-100 font-semibold">
@@ -133,7 +134,10 @@ const SingleCourse = ({ courseId }) => {
                 size={40}
                 className="bg-[#d3dafd] dark:bg-indigo-900 p-2 rounded-full text-black dark:text-gray-100"
               />
-              Published <span className="font-medium text-gray-900 dark:text-gray-100">{formattedDate}</span>
+              Published{" "}
+              <span className="font-medium text-gray-900 dark:text-gray-100">
+                {formattedDate}
+              </span>
             </h2>
 
             <h2 className="flex gap-3 items-center text-sm text-gray-700 dark:text-gray-100 font-semibold">
@@ -141,23 +145,28 @@ const SingleCourse = ({ courseId }) => {
                 size={40}
                 className="bg-[#d3dafd] dark:bg-indigo-900 p-2 rounded-full text-black dark:text-gray-100"
               />
-              Start Date: <span className="font-medium text-gray-900 dark:text-gray-100">{formattedStart}</span>
+              Start Date:{" "}
+              <span className="font-medium text-gray-900 dark:text-gray-100">
+                {formattedStart}
+              </span>
             </h2>
           </div>
         </div>
       </div>
 
       {/* Course content */}
-      <div className="container mx-auto flex flex-col lg:flex-row gap-5 xl:gap-0 items-start mt-12">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-5  items-start mt-12">
         {/* Accordion */}
-        <div className="pb-14 lg:flex-3 mx-3 xl:mx-0 w-full lg:w-2/3">
-          <PreviewAccordion chaptersData={type === "premium" ? courseContents : chapters} />
+        <div className="pb-14 lg:flex-3 mx-3 xl:mx-0 w-full lg:w-2/3 ">
+          <PreviewAccordion
+            chaptersData={type === "premium" ? courseContents : chapters}
+          />
         </div>
 
         {/* Video preview & buttons */}
         <div className="lg:flex-1 p-3 lg:p-6 border-2 border-pink-600 rounded-lg mx-3 lg:mx-0">
           <VideoPreview singleData={singleData} />
-          
+
           <div className="py-6">
             {/* Free course enroll */}
             {type === "free" && (
@@ -172,11 +181,13 @@ const SingleCourse = ({ courseId }) => {
             {/* Premium pricing */}
             {type === "premium" && (
               <>
-                <h2 className="text-gray-900 font-bold pb-5 text-xl">${price}</h2>
+                <h2 className="text-gray-900 font-bold pb-5 text-xl">
+                  ${price}
+                </h2>
                 <Link href={`/payment/${_id}`}>
-                <button className="px-4 py-1 xl:px-9 xl:py-3 text-sm 2xl:px-12 overflow-hidden font-primary font-medium tracking-tighter text-white group rounded-[5px] 2xl:text-xl cursor-pointer bg-linear-to-r from-[#394ef4] to-[#b966e7] w-full">
-                  Buy Now
-                </button>
+                  <button className="px-4 py-1 xl:px-9 xl:py-3 text-sm 2xl:px-12 overflow-hidden font-primary font-medium tracking-tighter text-white group rounded-[5px] 2xl:text-xl cursor-pointer bg-linear-to-r from-[#394ef4] to-[#b966e7] w-full">
+                    Buy Now
+                  </button>
                 </Link>
               </>
             )}

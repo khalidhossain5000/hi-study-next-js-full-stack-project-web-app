@@ -8,9 +8,11 @@ import SocialLogin from "@/components/Shared/SocialLogin/SocialLogin";
 
 import toast from "react-hot-toast";
 import axios from "axios";
+import { signIn } from "next-auth/react";
 
 const RegisterForm = () => {
-    const [error,setError]=useState('')
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleRegister = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -20,24 +22,32 @@ const RegisterForm = () => {
       email,
       password,
       name,
-      role:'student',
-      profileImage:'https://i.ibb.co/zVB99J4d/DEFAULT.jpg'
+      role: "student",
+      profileImage: "https://i.ibb.co/zVB99J4d/DEFAULT.jpg",
     };
-    try{
-const result = await axios.post("/api/auth/register", userInfo);
-    if (result?.data?.data?.userId) {
-      toast.success("Registration Successfull");
-    }
+    try {
 
-    console.log(result.data.data, "this is result");
-    }
-    
-catch(error){
-    const message=error?.response?.data?.message
-    setError(message)
-}
 
-    
+      setLoading(true);
+      const result = await axios.post("/api/auth/register", userInfo);
+      if (result?.data?.userId) {
+        toast.success("Registration Successfull");
+        setLoading(false);
+        // ✅ Auto-login using credentials provider
+      await signIn("credentials", {
+        redirect: true,      // true হলে redirect করবে
+        email,
+        password,
+        callbackUrl: "/", // login এর পরে redirect হবে
+      });
+      }
+console.log(result,data.userId);
+      console.log(result.data.data, "this is result");
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      setLoading(false)
+      setError(message);
+    }
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0e1015] text-white px-4">
@@ -129,9 +139,12 @@ catch(error){
           </div>
 
           {/* Register Button */}
-{
-    error && <p className="text-rose-500"> {error} <span className="text-indigo-500">Login Now</span></p>
-}
+          {error && (
+            <p className="text-rose-500">
+              {" "}
+              {error} <span className="text-indigo-500">Login Now</span>
+            </p>
+          )}
           <AnimatedButton
             className="bg-linear-to-r from-[#b966e7] to-[#394ef4] hover:scale-105 lg:p-6 text-white w-full"
             variant="default"
@@ -148,7 +161,7 @@ catch(error){
             borderRadius="10px"
             background="rgba(0, 0, 0, 1)"
           >
-            Register
+           {loading ? 'Registering...' : 'Register' }
           </AnimatedButton>
         </motion.form>
 

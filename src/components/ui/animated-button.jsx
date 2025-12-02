@@ -1,4 +1,4 @@
-"use client";;
+"use client";
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
@@ -13,32 +13,32 @@ const buttonVariants = cva(
         outline:
           "bg-transparent text-cyan-400 border border-cyan-400 hover:text-cyan-300",
         ghost: "bg-transparent text-cyan-400 hover:bg-cyan-950/30",
-        glow: "text-cyan-400 border border-cyan-400/30 hover:text-cyan-300 hover:shadow-glow"
+        glow: "text-cyan-400 border border-cyan-400/30 hover:text-cyan-300 hover:shadow-glow",
       },
       size: {
         default: "h-10 px-6 py-2",
         sm: "h-8 px-4 py-1 text-xs",
         lg: "h-12 px-8 py-3 text-base",
-        icon: "h-10 w-10"
+        icon: "h-10 w-10",
       },
       glow: {
         true: "hover:shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4]",
-        false: ""
+        false: "",
       },
       textEffect: {
         normal: "group-hover:tracking-normal",
-        spread: "group-hover:tracking-wider"
+        spread: "group-hover:tracking-wider",
       },
       uppercase: {
         true: "",
-        false: ""
+        false: "",
       },
       rounded: {
         default: "rounded-md",
         full: "rounded-full",
         none: "rounded-none",
-        custom: "rounded-[0.95rem]"
-      }
+        custom: "rounded-[0.95rem]",
+      },
     },
     defaultVariants: {
       variant: "default",
@@ -46,47 +46,48 @@ const buttonVariants = cva(
       glow: false,
       textEffect: "normal",
       uppercase: true,
-      rounded: "custom"
-    }
+      rounded: "custom",
+    },
   }
 );
 
-const AnimatedButton = React.forwardRef((
-  {
-    className,
-    variant,
-    size,
-    glow,
-    textEffect,
-    uppercase,
-    rounded,
-    asChild = false,
-    hideAnimations = false,
-    shimmerColor = "#03e9f4",
-    shimmerSize = "0.05em",
-    shimmerDuration = "3s",
-    borderRadius = "100px",
-    background = "rgba(0, 0, 0, 1)",
-    style,
-    children,
-    ...props
-  },
-  ref
-) => {
-  const Comp = asChild ? Slot : "button";
+const AnimatedButton = React.forwardRef(
+  (
+    {
+      className,
+      variant,
+      size,
+      glow,
+      textEffect,
+      uppercase,
+      rounded,
+      asChild = false,
+      hideAnimations = false,
+      shimmerColor = "#03e9f4",
+      shimmerSize = "0.05em",
+      shimmerDuration = "3s",
+      borderRadius = "100px",
+      background = "rgba(0, 0, 0, 1)",
+      style,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const Comp = asChild ? Slot : "button";
 
-  const combinedStyle = {
-    ...style,
-    "--shimmer-color": shimmerColor,
-    "--radius": borderRadius,
-    "--speed": shimmerDuration,
-    "--cut": shimmerSize,
-    "--bg": background,
-    "--spread": "90deg",
-    borderRadius: rounded === "custom" ? borderRadius : undefined
-  };
+    const combinedStyle = {
+      ...style,
+      "--shimmer-color": shimmerColor,
+      "--radius": borderRadius,
+      "--speed": shimmerDuration,
+      "--cut": shimmerSize,
+      "--bg": background,
+      "--spread": "90deg",
+      borderRadius: rounded === "custom" ? borderRadius : undefined,
+    };
 
-  const buttonStyle = `
+    const buttonStyle = `
     @keyframes animatedButton-shimmer-slide {
       to {
         transform: translate(calc(100cqw - 100%), 0);
@@ -124,40 +125,50 @@ const AnimatedButton = React.forwardRef((
     }
   `;
 
-  return (
-    <Comp
-      className={cn(
-        "animated-button animated-button-mobile",
-        buttonVariants({ variant, size, glow, textEffect, uppercase, rounded, className }),
-        glow && "shadow-glow-scoped"
-      )}
-      style={combinedStyle}
-      ref={ref}
-      {...props}>
-      <style jsx>{buttonStyle}</style>
-      {!hideAnimations && (
-        <div
-          className="absolute inset-0 overflow-visible -z-30 blur-[2px] [container-type:size]">
-          <div
-            className="absolute inset-0 h-[100cqh] animate-shimmer-slide-scoped [aspect-ratio:1]">
-            <div
-              className="absolute -inset-full w-auto rotate-0 animate-spin-around-scoped [background:conic-gradient(from_calc(270deg-(var(--spread)*0.5)),transparent_0,var(--shimmer-color)_var(--spread),transparent_var(--spread))]" />
-          </div>
-        </div>
-      )}
-      <div
-        className="absolute size-full rounded-2xl px-4 py-1.5 text-sm font-medium" />
-      <div
-        className="absolute -z-20 bg-gradient-to-r from-[#394ef4] to-[#b966e7]"
-        style={{ inset: shimmerSize, borderRadius }} />
-      <span
+    return (
+      <Comp
         className={cn(
-          "relative z-10 transition-all duration-300 flex items-center justify-center",
-          textEffect === "spread" && "group-hover:tracking-wider"
-        )}>{children}</span>
-    </Comp>
-  );
-});
+          "animated-button animated-button-mobile",
+          buttonVariants({
+            variant,
+            size,
+            glow,
+            textEffect,
+            uppercase,
+            rounded,
+            className,
+          }),
+          glow && "shadow-glow-scoped"
+        )}
+        style={combinedStyle}
+        ref={ref}
+        {...props}
+      >
+        <style jsx>{buttonStyle}</style>
+        {!hideAnimations && (
+          <div className="absolute inset-0 overflow-visible -z-30 blur-[2px] [max-w-7xl-type:size]">
+            <div className="absolute inset-0 h-[100cqh] animate-shimmer-slide-scoped [aspect-ratio:1]">
+              <div className="absolute -inset-full w-auto rotate-0 animate-spin-around-scoped [background:conic-gradient(from_calc(270deg-(var(--spread)*0.5)),transparent_0,var(--shimmer-color)_var(--spread),transparent_var(--spread))]" />
+            </div>
+          </div>
+        )}
+        <div className="absolute size-full rounded-2xl px-4 py-1.5 text-sm font-medium" />
+        <div
+          className="absolute -z-20 bg-gradient-to-r from-[#394ef4] to-[#b966e7]"
+          style={{ inset: shimmerSize, borderRadius }}
+        />
+        <span
+          className={cn(
+            "relative z-10 transition-all duration-300 flex items-center justify-center",
+            textEffect === "spread" && "group-hover:tracking-wider"
+          )}
+        >
+          {children}
+        </span>
+      </Comp>
+    );
+  }
+);
 
 AnimatedButton.displayName = "AnimatedButton";
 

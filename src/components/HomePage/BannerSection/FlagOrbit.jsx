@@ -35,7 +35,7 @@ const FlagOrbit = () => {
         />
       </div>
 
-      {/* All flags container */}
+      {/* All flags max-w-7xl */}
       <div
         className="all-flags flex justify-center rounded-full w-[290px] md:w-[500px] h-[290px] md:h-[500px] sm:w-[300px] sm:h-[300px] absolute top-0 border-2 dark:border border-dashed border-gray-400 dark:border-gray-50 z-10 animate-spin hover:paused"
         style={{ animationDuration: "30s" }}
@@ -199,7 +199,7 @@ export default FlagOrbit;
 // const FlagOrbit = () => {
 //   return (
 //     <div className=" relative flex items-center justify-center w-[500px] h-[500px]  mx-auto ">
-//       {/* flags world map container here */}
+//       {/* flags world map max-w-7xl here */}
 //       <div className="relative">
 //         <Image
 //           src={worldmap}
@@ -209,7 +209,7 @@ export default FlagOrbit;
 //           className="w-full relative z-10"
 //         />
 //       </div>
-//       {/* all flags container */}
+//       {/* all flags max-w-7xl */}
 //       <div
 
 //         className="all-flags flex justify-center rounded-full w-[500px] h-[500px] absolute top-0 border-2 border-dashed border-gray-600 z-10 animate-spin hover:paused"

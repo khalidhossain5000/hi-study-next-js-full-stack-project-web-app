@@ -12,12 +12,8 @@ const Sidebar = () => {
   const { data: session } = useSession();
   let sidebarRoutes = [];
   // const role = session?.user?.role;
-  // const role = session?.user?.role;
-  // const role = session?.user?.role;
-  // const role = session?.user?.role;
-  // const role = session?.user?.role;
-  // const role = session?.user?.role;
-  const role = "student";
+  
+  const role = "admin"; // just for testing
   if (role === "admin") {
     sidebarRoutes = [
       {

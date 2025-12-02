@@ -119,7 +119,7 @@ const UsersCard = () => {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-indigo-950 dark:to-purple-900 p-2 md:mt-5">
-      <div className="container mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-[#394ef4] to-[#ba66e7] bg-clip-text text-transparent mb-4">
@@ -132,7 +132,7 @@ const UsersCard = () => {
 
         {/* Users Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {AllUsers.map((user) => (
+          {AllUsers?.map((user) => (
             <div
               key={user._id}
               className="group relative bg-linear-to-br from-white/80 to-white/40 dark:from-gray-800/80 dark:to-gray-800/40 backdrop-blur-xl rounded-3xl border border-white/30 dark:border-gray-700/50 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] overflow-hidden"

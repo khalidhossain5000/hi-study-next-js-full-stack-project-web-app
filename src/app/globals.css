@@ -1,12 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+
+
 body {
   font-family: var(--font-poppins);
 }
 @custom-variant dark (&:is(.dark *));
 @theme {
   --breakpoint-lxl: 1300px;
-  --breakpoint-3xl: 1800px;
+  --breakpoint-9xl: 1900px;
 }
 
 @theme inline {
@@ -51,9 +53,13 @@ body {
   }
 }
 
+
+
+
 .flags-reverse {
   animation: roading-falgs-reverse 30s linear infinite;
 }
+
 
 /* test code starts from here s */
 .rbt {
@@ -73,3 +79,4 @@ body {
     color: #192335;
     width: max-content;
 }
+

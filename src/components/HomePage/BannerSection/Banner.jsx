@@ -12,6 +12,7 @@ import curveiii from "../../../assets/banner/bg/curve-line-3.png";
 import curveiv from "../../../assets/banner/bg/curve-line-4.png";
 
 import dot from "../../../assets/banner/bg/dot-bg.png";
+import Link from "next/link";
 const Banner = () => {
   return (
     <div className=" bg-[#F5F7FA] dark:bg-[#192335]  overflow-x-hidden py-12 lg:py-22 2xl:pt-[155px] 2xl:pb-[165px] relative">
@@ -46,7 +47,7 @@ const Banner = () => {
       <div className="absolute bottom-0 left-[73px]">
         <img src={dot.src} alt="dot bg" className="max-w-full h-auto" />
       </div>
-      <div className="flex flex-col-reverse lg:flex-row items-center gap-20 lg:gap-10 xl:pt-22 2xl:pt-0 container mx-auto">
+      <div className="flex flex-col-reverse lg:flex-row items-center gap-20 lg:gap-10 xl:pt-22 2xl:pt-0 max-w-7xl mx-auto">
         <div className="flex-1 content text-center lg:text-left space-y-6 px-2 ">
           <h5 className="text-sm lg:text-[18px] bg-linear-to-t from-[#394ef4] to-[#b966e7] bg-clip-text text-transparent">
             Multi-Language Academy
@@ -59,7 +60,7 @@ const Banner = () => {
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
             sint. Velit officia consequat.
           </p>
-          <ButtonIcon>Find Your Courses</ButtonIcon>
+        <Link href={'/all-courses'}> <span> <ButtonIcon>Find Your Courses</ButtonIcon></span></Link>
         </div>
         {/* flag orbit component here */}
         <div className="relative flex items-center justify-center  flex-1">

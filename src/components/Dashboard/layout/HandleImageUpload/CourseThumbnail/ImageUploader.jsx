@@ -45,7 +45,7 @@
 //   return (
 //     <div className="w-full flex flex-col    gap-3  h-full">
 //       {!preview ? (
-//         <label className="py-6 h-9/12 xl:py-0 container  rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 transition dark:text-white">
+//         <label className="py-6 h-9/12 xl:py-0 max-w-7xl  rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 transition dark:text-white">
 //           <Upload className="w-10 h-10 text-gray-400 dark:text-white" />
 //           <p className="text-sm text-gray-400 mt-2">
 //             {uploading ? "Uploading..." : "Upload Image"}
@@ -79,15 +79,6 @@
 
 // export default ImageUpload;
 
-
-
-
-
-
-
-
-
-
 "use client";
 import axios from "axios";
 import { Upload, X } from "lucide-react";
@@ -97,7 +88,7 @@ const ImageUpload = ({ onUpload, imageUrl }) => {
   const [preview, setPreview] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  // Default image handle 
+  // Default image handle
   useEffect(() => {
     if (imageUrl) {
       setPreview(imageUrl);
@@ -118,7 +109,7 @@ const ImageUpload = ({ onUpload, imageUrl }) => {
     const formData = new FormData();
     formData.append("image", file);
 
-    console.log(formData,'this is formdata');
+    console.log(formData, "this is formdata");
     try {
       const res = await axios.post(
         `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_KEY}`,

@@ -10,18 +10,19 @@ import { ModeToggle } from "../ThemeToggle/ThemeToggle";
 import HomeResponsiveMenu from "../ResponsiveMenu/HomeMenu/HomeResponsiveMenu";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { AnimatedButton } from "@/components/ui/animated-button";
+
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { TrialButton } from "@/components/lightswind/trial-button";
 const NavBar = () => {
-  const { data: session } = useSession();
-  
+  const { data: session, status } = useSession();
+
   return (
     <div className="bg-[#ffffff] dark:bg-[#273041] py-3 2xl:py-3 shadow-md px-2 ">
-      <nav className="container mx-auto flex items-center justify-between ">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between ">
         <div className="logoh">
           <Image
             src={lightLogo}
@@ -43,53 +44,39 @@ const NavBar = () => {
               <ModeToggle />
             </div>
             <div className="hidden lg:flex items-center gap-6">
-              {
-                session?.user && <div>
-                {/* user name showing on tooltip image hover */}
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Image
-                      src={
-                        session?.user?.image ||
-                        "https://i.ibb.co/zVB99J4d/DEFAULT.jpg"
-                      }
-                      alt="user profile image with avatar here"
-                      width={50}
-                      height={50}
-                      className="rounded-full border-2 border-indigo-600 p-1 cursor-pointer"
-                    />
-                  </TooltipTrigger>
-                  <TooltipContent className={`bg-[#d176da] p-2 text-md`}>
-                    <p>{session?.user?.name}</p>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-              }
+              {status === "loading" && (
+                <div className="flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+                </div>
+              )}
+              {status === "authenticated" && session?.user && (
+                <div>
+                  {/* user name showing on tooltip image hover */}
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Image
+                        src={session?.user?.profileImage}
+                        alt="user profile image with avatar here"
+                        width={50}
+                        height={50}
+                        className="rounded-full border-2 border-indigo-600 p-1 cursor-pointer"
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent className={`bg-[#d176da] p-2 text-md`}>
+                      <p>{session?.user?.name}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
+              )}
               <div>
                 {!session?.user ? (
                   <Link href={`/auth/login`}>
                     <Button>Login</Button>
                   </Link>
                 ) : (
-                  <AnimatedButton
-                    className="bg-linear-to-r from-[#f70449] to-[#fb2f01] hover:scale-105 lg:p-6 text-white w-full css"
-                    variant="default"
-                    size="default"
-                    glow={false}
-                    textEffect="glitch"
-                    uppercase={true}
-                    rounded="custom"
-                    asChild={false}
-                    hideAnimations={false}
-                    shimmerColor="#f1f1f3"
-                    shimmerSize="0.20em"
-                    shimmerDuration="2s"
-                    borderRadius="10px"
-                    background="rgba(0, 0, 0, 1)"
-                     onClick={() => signOut({ callbackUrl: "/" })}
-                  >
+                  <TrialButton onClick={() => signOut({ callbackUrl: "/" })}>
                     Log Out
-                  </AnimatedButton>
+                  </TrialButton>
                 )}
               </div>
             </div>

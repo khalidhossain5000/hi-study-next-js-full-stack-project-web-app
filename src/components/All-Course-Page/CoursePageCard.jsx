@@ -25,10 +25,6 @@ const CoursePageCard = ({ course }) => {
       0
     ) || 0;
 
-  
-  
- 
- 
   return (
     <div className="bg-white dark:bg-[#273041] p-5 md:p-[30px] hover:scale-105 transition duration-500 shadow-xl dark:shadow-lg shadow-gray-400 dark:shadow-gray-900 rounded-lg -translate-y-44">
       {/* thumbnail image */}
@@ -95,7 +91,10 @@ const CoursePageCard = ({ course }) => {
             className="rounded-full"
           />
           <h2 className="flex items-center gap-1 text-[#6b7385]  text-sm font-semibold font-poppins">
-            by <span className="font-bold text-gray-900 dark:text-yellow-500">{instructorName}</span>
+            by{" "}
+            <span className="font-bold text-gray-900 dark:text-yellow-500">
+              {instructorName}
+            </span>
           </h2>
         </div>
         {/* price and enorll / see more button */}
@@ -103,16 +102,17 @@ const CoursePageCard = ({ course }) => {
           <h5 className="text-[#6b7385] dark:text-amber-400 font-black text-xl">
             $ {type === "premium" ? price : "0"}
           </h5>
-<Link href={`/all-courses/${course._id}`}>
-          <h2 className="relative text-sm font-semibold text-[#192335] dark:text-white group cursor-pointer flex items-center gap-2">
-            {" "}
-            See More <ArrowRight size={20} />
-            <span className="flex items-center absolute left-0 bottom-0 h-[3px] bg-[#b966e7] w-full scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-in-out"></span>{" "}
-          </h2>
 
-</Link>
+          <Link href={`/all-courses/${course._id}`}>
+            <h2 className="relative text-sm font-semibold text-[#192335] dark:text-white group cursor-pointer flex items-center gap-2 whitespace-nowrap">
+              {" "}
+              See More <ArrowRight size={20} />
+              <span className="flex items-center absolute left-0 bottom-0 h-[3px] bg-[#b966e7] w-full scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-in-out"></span>{" "}
+            </h2>
+          </Link>
 
-          <Link href={"/"}>
+         {
+          type==='free' &&  <Link href={`/all-courses/${course._id}`}>
             <button
               className="relative inline-flex items-center justify-center 
                      px-7 py-2 whitespace-nowrap tracking-wide
@@ -128,9 +128,33 @@ const CoursePageCard = ({ course }) => {
               Enroll Now
             </button>
           </Link>
+         }
+
+          {/* premium courses */}
+          {
+          type==='premium' &&  <Link href={`/payment/${course._id}`}>
+           <button
+    className="relative inline-flex items-center justify-center 
+              px-7 py-2 whitespace-nowrap tracking-wide 
+              rounded-full overflow-hidden 
+              bg-gradient-to-r from-sky-500 via-indigo-600 to-fuchsia-600 
+              text-white font-semibold text-lg 
+              shadow-lg shadow-fuchsia-500/50 
+              transition-all duration-500 ease-in-out 
+              hover:scale-[1.02] hover:shadow-xl hover:shadow-fuchsia-500/70 
+              active:scale-[0.98] 
+              transform hover:-translate-y-0.5 
+              before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent 
+              before:translate-x-[-200%] hover:before:translate-x-[200%] 
+              before:transition-transform before:duration-700 
+              before:pointer-events-none"
+>
+    <span className="z-10">Buy Now</span>
+</button>
+          </Link>
+         }
         </div>
       </div>
-      
     </div>
   );
 };

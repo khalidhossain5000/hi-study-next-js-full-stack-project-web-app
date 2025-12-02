@@ -1,5 +1,3 @@
-
-
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -33,16 +31,18 @@ const FilterCourse = () => {
   const categories = ["All", ...new Set(allCourses.map((c) => c.category))];
 
   return (
-    <div className="py-10 text-center container mx-auto px-3 lg:px-0">
+    <div className="bg-[#f9f9ff] dark:bg-[#333d51]">
+    <div className="py-10 text-center max-w-7xl mx-auto px-3 lg:px-0">
       <div className="titles py-6 lg:py-9 space-y-3">
         <h5 className="text-center text-sm lg:text-[18px] bg-linear-to-t from-[#394ef4] to-[#b966e7] bg-clip-text text-transparent font-bold">
-            Our Course
-          </h5>
-          <h2 className="text-2xl lg:text-3xl xl:text-[44px] text-[#192335] text-center font-semibold font-gabriela dark:text-gray-100">Limitless Learning, More</h2>
-           <h5 className="text-2xl lg:text-3xl xl:text-[44px] bg-linear-to-t from-[#394ef4] to-[#b966e7] bg-clip-text text-transparent font-poppins font-bold ">
-            Possibilities
-          </h5>
-
+          Our Course
+        </h5>
+        <h2 className="text-2xl lg:text-3xl xl:text-[44px] text-[#192335] text-center font-semibold font-gabriela dark:text-gray-100">
+          Limitless Learning, More
+        </h2>
+        <h5 className="text-2xl lg:text-3xl xl:text-[44px] bg-linear-to-t from-[#394ef4] to-[#b966e7] bg-clip-text text-transparent font-poppins font-bold ">
+          Possibilities
+        </h5>
       </div>
       {/* Category Buttons */}
       <div className="py-6 lg:py-9 xl:py-14 flex flex-wrap justify-center gap-3 mb-6">
@@ -66,15 +66,16 @@ const FilterCourse = () => {
 
       {/* View All Button */}
       <div className="mt-8 lg:mt-12  flex justify-center">
-        <Link href={`/all-courses`}>
-        <ButtonIcon>
-         
-          
-        
-          View {activeCategory}
-        </ButtonIcon>
+        <Link   href={
+    activeCategory === "All"
+      ? "/all-courses"
+      : `/cateories/${activeCategory}`
+  }>
+          <ButtonIcon>View {activeCategory}</ButtonIcon>
         </Link>
       </div>
+    </div>
+
     </div>
   );
 };
